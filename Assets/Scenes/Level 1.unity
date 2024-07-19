@@ -679,7 +679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3265659901778501735, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.8
+      value: 7.7323
       objectReference: {fileID: 0}
     - target: {fileID: 3265659901778501735, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -718,8 +718,20 @@ PrefabInstance:
       value: S_Walk_0
       objectReference: {fileID: 0}
     - target: {fileID: 8440176722008866439, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
+      propertyPath: atkRange
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440176722008866439, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
+      propertyPath: atkSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440176722008866439, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
       propertyPath: moveSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440176722008866439, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
