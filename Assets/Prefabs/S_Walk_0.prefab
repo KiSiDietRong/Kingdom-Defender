@@ -165,7 +165,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -194,4 +194,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7165010176425855994}
-  moveSpeed: 2
+  moveSpeed: 10
+  atkRange: 1.4
+  atkSpeed: 2
+  dmg: 10
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
