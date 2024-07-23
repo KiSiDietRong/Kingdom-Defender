@@ -114,6 +114,7 @@ public class Player_Ctrl : MonoBehaviour
     {
         isAttack = true;
         ChangeAnimation("player1_atk");
+        AudioManage.Instance.PlaySFX("Attack");
         yield return new WaitForSeconds(PlayerAnim.GetCurrentAnimatorStateInfo(0).length);
         isAttack = false;
         ChangeAnimation("player1_ani");
