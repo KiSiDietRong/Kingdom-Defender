@@ -6,19 +6,19 @@ using UnityEngine.Networking;
 
 public class LogInScript : MonoBehaviour
 {
-    public TMP_InputField userName;
-    public TMP_InputField password;
+    public TMP_InputField user;
+    public TMP_InputField passwd;
     public TextMeshProUGUI notification;
 
     public void LoginButton()
     {
-        StartCoroutine(LogIn());
+        StartCoroutine(Login());
     }
-    private IEnumerator LogIn()
+    private IEnumerator Login()
     {
         WWWForm form = new WWWForm();
-        form.AddField("user: ", userName.text);
-        form.AddField ("password", password.text);
+        form.AddField("user", user.text);
+        form.AddField ("passwd", passwd.text);
 
         UnityWebRequest www = UnityWebRequest.Post("https://fpl.expvn.com/dangky.php", form);
         yield return www.SendWebRequest();
@@ -27,7 +27,7 @@ public class LogInScript : MonoBehaviour
         {
             notification.text = "Log in not successful";
         }
-        else
+        else if(www.isDone)
         {
             string get = www.downloadHandler.text;
 
