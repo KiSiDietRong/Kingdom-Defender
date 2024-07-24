@@ -67,6 +67,8 @@ public class Player_Ctrl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         PlayerAnim = GetComponent<Animator>();
         targetPosition = transform.position;
+
+        AudioManage.Instance.PlayMusic("BattleTheme");
     }
     void Update()
     {
