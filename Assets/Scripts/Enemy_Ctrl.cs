@@ -15,7 +15,8 @@ public class Enemy_Ctrl : MonoBehaviour
     [Header("Attack Attributes")]
     [SerializeField] private float atkRange = 1.0f;
     [SerializeField] private float atkSpeed = 1.0f;
-    [SerializeField] private int dmg = 10;
+    [SerializeField] private int minDamage = 7;
+    [SerializeField] private int maxDamage = 12;
     [SerializeField] private LayerMask playerLayer;
 
     private Transform target;
@@ -80,12 +81,14 @@ public class Enemy_Ctrl : MonoBehaviour
     private IEnumerator PlayAttackAnimation()
     {
         isAttacking = true;
-        ChangeAnimation("atk"); 
+        ChangeAnimation("atk");
+        AudioManage.Instance.PlaySFX("EnemyAtk");
         yield return new WaitForSeconds(atkSpeed);
-        //if (player != null)
-        //{
-        //    player.GetComponent<PlayerHealth>().TakeDamage(dmg);
-        //}
+        if (player != null)
+        {
+            int damage = Random.Range(minDamage, maxDamage);
+            player.GetComponent<Player_Ctrl>().TakeDamage(damage);
+        }
         isAttacking = false;
         ChangeAnimation("walk");
     }

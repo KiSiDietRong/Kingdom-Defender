@@ -5,51 +5,13 @@ using UnityEngine;
 
 public class Player_Ctrl : MonoBehaviour
 {
-    #region Enemy_Code
-    //[Header("References")]
-    //[SerializeField] private Rigidbody2D rb;
-
-    //[Header("Attributes")]
-    //[SerializeField] private float moveSpeed = 2;
-
-    //private Transform target;
-    //private int pathIndex = 0;
-    //private void Start()
-    //{
-    //    target = LevelManager.main.path[pathIndex];
-    //}
-
-    //private void Update()
-    //{
-    //    if (Vector2.Distance(target.position, transform.position) <= 0.1f)
-    //    {
-    //        pathIndex++;
-
-    //        if (pathIndex == LevelManager.main.path.Length)
-    //        {
-    //            Destroy(gameObject);
-    //            return;
-    //        }
-    //        else
-    //        {
-    //            target = LevelManager.main.path[pathIndex];
-    //        }
-    //    }
-    //}
-
-    //private void FixedUpdate()
-    //{
-    //    Vector2 dir = (target.position - transform.position).normalized;
-
-    //    rb.velocity = dir * moveSpeed;
-    //}
-    #endregion
-
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] private Animator PlayerAnim;
     [SerializeField] private float attackRange = 1.0f;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private LayerMask enemies;
+    [SerializeField] private HealthControl health;
+    [SerializeField] private Transform healthbarFollow;
 
     private Rigidbody2D rb;
     private string currentAni;
@@ -59,8 +21,13 @@ public class Player_Ctrl : MonoBehaviour
 
     private bool isAttack = false;
     private bool isMoving = false;
-    //public AudioClip walkClip;
-    //AudioSource playerSource;
+    private bool isDead = false;
+
+    private int maxHealth = 100;
+    private int currentHealth;
+
+    private Vector3 respawn;
+    
 
     private void Start()
     {
@@ -68,15 +35,21 @@ public class Player_Ctrl : MonoBehaviour
         PlayerAnim = GetComponent<Animator>();
         targetPosition = transform.position;
 
+        currentHealth = maxHealth;
+        health.SetMaxHealth(maxHealth);
+
         AudioManage.Instance.PlayMusic("BattleTheme");
+
+        respawn = transform.position;
     }
     void Update()
     {
-        if(!isAttack)
+        if(!isAttack && !isDead)
         {
             MovePlayer(moveSpeed);
         }
         Attack();
+        UpdateHealthBarPosition();
     }
 
     private void MovePlayer(float moveSpeed)
@@ -140,5 +113,39 @@ public class Player_Ctrl : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        currentHealth -= dmg;
+        health.SetHealth(currentHealth);
+
+        if(currentHealth < 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isDead = true;
+        rb.velocity = Vector2.zero;
+        ChangeAnimation("player1_die");
+        StartCoroutine(Respawn());
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(10);
+        isDead = false;
+        transform.position = respawn;
+        currentHealth = maxHealth;
+        health.SetHealth(maxHealth);
+        ChangeAnimation("player1_ani");
+    }
+
+    private void UpdateHealthBarPosition()
+    {
+        health.transform.position = healthbarFollow.position;
     }
 }
