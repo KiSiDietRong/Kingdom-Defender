@@ -129,13 +129,15 @@ public class Enemy_Ctrl : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        StartCoroutine(EnemyDeath());
+        EnemySpawner.onEnemyDestroy.Invoke();
+        Destroy(gameObject, 1f);
+        //StartCoroutine(EnemyDeath());
     }
 
-    private IEnumerator EnemyDeath()
-    {
-        ChangeAnimation("die");
-        yield return new WaitForSeconds(EnemyAni.GetCurrentAnimatorStateInfo(0).length);
-        Destroy(gameObject);
-    }
+    //private IEnumerator EnemyDeath()
+    //{
+    //    ChangeAnimation("die");
+    //    yield return new WaitForSeconds(EnemyAni.GetCurrentAnimatorStateInfo(0).length);
+    //    Destroy(gameObject);
+    //}
 }

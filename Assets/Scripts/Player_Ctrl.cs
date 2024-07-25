@@ -31,8 +31,8 @@ public class Player_Ctrl : MonoBehaviour
     private Transform enemy;
 
     private Vector3 respawn;
-    
 
+    private Coroutine regenCoroutine;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,6 +54,21 @@ public class Player_Ctrl : MonoBehaviour
             MovePlayer(moveSpeed);
         }
         Attack();
+        if (!isMoving && !isAttack && !isDead)
+        {
+            if (regenCoroutine == null)
+            {
+                regenCoroutine = StartCoroutine(RegenerateHealth());
+            }
+        }
+        else
+        {
+            if (regenCoroutine != null)
+            {
+                StopCoroutine(regenCoroutine);
+                regenCoroutine = null;
+            }
+        }
     }
 
     private void MovePlayer(float moveSpeed)
@@ -86,6 +101,7 @@ public class Player_Ctrl : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemies);
         if(hitEnemies.Length > 0 && !isAttack)
         {
+            enemy = hitEnemies[0].transform;
             StartCoroutine(AttackAnimation());
         }
     }
@@ -185,5 +201,17 @@ public class Player_Ctrl : MonoBehaviour
         isDead = false;
         StartCoroutine(FadeIn());
         ChangeAnimation("player1_ani");
+    }
+    private IEnumerator RegenerateHealth()
+    {
+        while (true)
+        {
+            if (currentHealth < maxHealth)
+            {
+                currentHealth += 1;
+                healthSlider.value = currentHealth;
+            }
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

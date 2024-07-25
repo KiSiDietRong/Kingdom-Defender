@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSounds:
   - name: Theme
+    clip: {fileID: 8300000, guid: d98a14a93d1680445a0d23d77a3dc289, type: 3}
+  - name: BattleTheme
     clip: {fileID: 8300000, guid: cdf36a7412b98a147921f89e52d5a831, type: 3}
   sfxSounds:
   - name: Attack
