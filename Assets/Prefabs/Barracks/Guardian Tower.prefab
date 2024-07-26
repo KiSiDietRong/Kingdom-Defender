@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652bb33182a643549a56615ed7cb4faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierPrefab: {fileID: 7583556061713332419, guid: 001f5bac64c1d424abe1d398bee8c901, type: 3}
+  soldierPrefab: {fileID: 210780862234666035, guid: 0a08dce9ca1afea4b9912d4f7e360293, type: 3}
   spawnPoints:
   - {fileID: 5805115607097267017}
   - {fileID: 1596420347302877135}
