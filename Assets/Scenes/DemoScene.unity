@@ -27886,11 +27886,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 871128294147567276, guid: d04e65e85582fdf40b2c9ff2adc6cf9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.7
+      value: 12.15
       objectReference: {fileID: 0}
     - target: {fileID: 871128294147567276, guid: d04e65e85582fdf40b2c9ff2adc6cf9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.3
+      value: 10.17
       objectReference: {fileID: 0}
     - target: {fileID: 871128294147567276, guid: d04e65e85582fdf40b2c9ff2adc6cf9e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27927,10 +27927,6 @@ PrefabInstance:
     - target: {fileID: 2955836013079145524, guid: d04e65e85582fdf40b2c9ff2adc6cf9e, type: 3}
       propertyPath: m_Name
       value: archertower
-      objectReference: {fileID: 0}
-    - target: {fileID: 7933507349115037981, guid: d04e65e85582fdf40b2c9ff2adc6cf9e, type: 3}
-      propertyPath: bps
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -43,6 +43,7 @@ public class archertower: MonoBehaviour
             if (timeUntilFire >= 1f / bps)
             {
                 Shoot();
+                timeUntilFire = 0f;
             }
         }
     }
