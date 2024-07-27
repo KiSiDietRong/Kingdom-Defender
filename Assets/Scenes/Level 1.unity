@@ -1009,7 +1009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayerID
@@ -26048,7 +26048,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3020730121306147388, guid: 6ceafe5f21c1cf442ac0fb1a43b96fed, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3020730121306147388, guid: 6ceafe5f21c1cf442ac0fb1a43b96fed, type: 3}
       propertyPath: m_SortingLayerID
@@ -26123,7 +26123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &659443758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26283,7 +26283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayerID
@@ -35455,7 +35455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayerID
@@ -36837,11 +36837,9 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 6952961952523068279, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
   startButton: {fileID: 1581814588}
-  skipWaveButton: {fileID: 1737825155}
   countdownText: {fileID: 115526701}
   waveCounterText: {fileID: 208339037}
   enemyPerSec: 0.5
-  skipWaveDelay: 10
   waves:
   - enemyCounts: 05000000
     timeUntilNextWave: 40
@@ -36947,7 +36945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayerID
@@ -39193,7 +39191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5812450782381654383, guid: 0e9c01c5320f8b54e88e9f212e023b1e, type: 3}
       propertyPath: m_SortingLayerID
@@ -39458,7 +39456,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3020730121306147388, guid: 6ceafe5f21c1cf442ac0fb1a43b96fed, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3020730121306147388, guid: 6ceafe5f21c1cf442ac0fb1a43b96fed, type: 3}
       propertyPath: m_SortingLayerID
@@ -39687,7 +39685,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4390271584575212578, guid: dcddb31208bf58f47b9ff74e3a9ed486, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4390271584575212578, guid: dcddb31208bf58f47b9ff74e3a9ed486, type: 3}
       propertyPath: m_SortingLayerID
@@ -42656,7 +42654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6357604157585414415, guid: b9412709ab87d7646b8c73774c7fa825, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6357604157585414415, guid: b9412709ab87d7646b8c73774c7fa825, type: 3}
       propertyPath: m_SortingLayerID
