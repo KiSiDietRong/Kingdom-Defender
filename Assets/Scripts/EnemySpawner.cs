@@ -8,46 +8,42 @@ public class EnemySpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private Button startButton;
-    [SerializeField] private Button skipButton;
     [SerializeField] private Text countdownText;
+    [SerializeField] private Text waveCounterText;
 
     [Header("Attributes")]
     [SerializeField] private float enemyPerSec = 0.5f;
-    [SerializeField] private float timeBetweenWave = 5f;
-    [SerializeField] private float startDelay = 3f;
-    [SerializeField] private float skipButtonDelay = 5f;
-    [SerializeField] private float skipDelay = 2f;
-    [SerializeField] private float difficultyScalingFactor = 0.75f;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
 
     [Header("Wave Settings")]
     [SerializeField] private Wave[] waves;
+    [SerializeField] private int totalWaves = 7;
 
     private int currentWaveIndex = 0;
     private int enemyAlive;
     private int enemyLeftToSpawn;
     private bool isSpawning = false;
+    private bool waveCountdownRunning = false;
 
-    private float timeUntilNextWave;
     private float timeSinceLastSpawn;
-
-    private Coroutine startDelayCoroutine;
-    private Coroutine skipButtonDelayCoroutine;
-    private Coroutine skipDelayCoroutine;
-    private Coroutine waveCountdownCoroutine;
+    private float timeRemaining;
 
     private void Awake()
     {
-        onEnemyDestroy.AddListener(EnemyDestroy);
+        if (waves.Length > 0)
+        {
+            timeRemaining = waves[currentWaveIndex].timeUntilNextWave;
+        }
     }
 
     private void Start()
     {
         startButton.onClick.AddListener(StartWaveSequence);
-        skipButton.onClick.AddListener(SkipWave);
         ShowStartButton();
+        UpdateWaveCounterText();
+        UpdateCountdownText(timeRemaining);
     }
 
     private void Update()
@@ -64,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
                 timeSinceLastSpawn = 0f;
             }
 
-            if (enemyAlive == 0 && enemyLeftToSpawn == 0)
+            if (enemyAlive == 0 && enemyLeftToSpawn == 0 && !waveCountdownRunning)
             {
                 EndWave();
             }
@@ -75,64 +71,87 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawning = false;
         timeSinceLastSpawn = 0f;
-        currentWaveIndex++;
-        if (currentWaveIndex < waves.Length)
+
+        if (currentWaveIndex < waves.Length - 1)
         {
-            StartCoroutine(StartSkipButtonDelay());
+            // Move to the next wave directly after finishing current wave
+            currentWaveIndex++;
+            StartWaveCountdown(); // Start the countdown for the next wave
         }
         else
         {
             Debug.Log("All waves completed!");
+            // Optionally, you can handle the end of all waves here
         }
     }
 
-    private IEnumerator StartSkipButtonDelay()
+    private void StartNextWave()
     {
-        ShowSkipButton();
-        yield return new WaitForSeconds(skipButtonDelay);
-        HideSkipButton();
+        if (currentWaveIndex < waves.Length)
+        {
+            Wave currentWave = waves[currentWaveIndex];
+            enemyLeftToSpawn = currentWave.enemyCounts[0];
+            timeRemaining = currentWave.timeUntilNextWave;
+            UpdateWaveCounterText();
+            UpdateCountdownText(timeRemaining);
+            isSpawning = true;
+
+            // Reset countdown for the next wave
+            StopCoroutine("WaveDurationCountdown");
+            waveCountdownRunning = false;
+
+            // Start spawning enemies immediately
+            StartCoroutine(WaveDurationCountdown());
+        }
+    }
+
+    private void StartWaveCountdown()
+    {
+        if (!waveCountdownRunning)
+        {
+            waveCountdownRunning = true;
+            StartCoroutine(CountdownCoroutine());
+        }
+    }
+
+    private IEnumerator CountdownCoroutine()
+    {
+        while (timeRemaining > 0)
+        {
+            UpdateCountdownText(timeRemaining);
+            yield return new WaitForSeconds(1f);
+            timeRemaining--;
+        }
+
+        timeRemaining = 0;
+        UpdateCountdownText(timeRemaining);
+        waveCountdownRunning = false;
+
+        // Move to the next wave
         StartNextWave();
+    }
+
+    private IEnumerator WaveDurationCountdown()
+    {
+        // Start countdown for the wave's duration
+        while (timeRemaining > 0)
+        {
+            UpdateCountdownText(timeRemaining);
+            yield return new WaitForSeconds(1f);
+            timeRemaining--;
+        }
+
+        timeRemaining = 0;
+        UpdateCountdownText(timeRemaining);
+
+        // Move to the next wave
+        EndWave();
     }
 
     public void StartWaveSequence()
     {
         startButton.gameObject.SetActive(false);
-        startDelayCoroutine = StartCoroutine(StartDelayCoroutine());
-    }
-
-    private IEnumerator StartDelayCoroutine()
-    {
-        yield return new WaitForSeconds(startDelay);
-        StartNextWave();
-    }
-
-    private void StartNextWave()
-    {
-        isSpawning = true;
-        Wave currentWave = waves[currentWaveIndex];
-        enemyLeftToSpawn = currentWave.numEnemies;
-        timeSinceLastSpawn = 0f;
-        waveCountdownCoroutine = StartCoroutine(StartWaveCountdown());
-    }
-
-    private IEnumerator StartWaveCountdown()
-    {
-        timeUntilNextWave = timeBetweenWave;
-        UpdateCountdownText();
-        while (timeUntilNextWave > 0)
-        {
-            yield return new WaitForSeconds(1f);
-            timeUntilNextWave--;
-            UpdateCountdownText();
-        }
-        StartNextWave();
-    }
-
-    public void SkipWave()
-    {
-        HideSkipButton();
-        StopCoroutine(waveCountdownCoroutine);
-        EndWave();
+        StartNextWave(); // Start the first wave immediately
     }
 
     private void EnemyDestroy()
@@ -146,30 +165,25 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
 
-    private void UpdateCountdownText()
+    private void UpdateCountdownText(float timeRemaining)
     {
-        countdownText.text = "Next wave in: " + timeUntilNextWave.ToString() + "s";
+        countdownText.text = $"Time left: {Mathf.CeilToInt(timeRemaining)}s";
+    }
+
+    private void UpdateWaveCounterText()
+    {
+        waveCounterText.text = $"Wave: {currentWaveIndex + 1}/{totalWaves}";
     }
 
     [System.Serializable]
     public class Wave
     {
-        public int numEnemies;
+        public int[] enemyCounts;
+        public float timeUntilNextWave;
     }
 
     private void ShowStartButton()
     {
         startButton.gameObject.SetActive(true);
-        skipButton.gameObject.SetActive(false);
-    }
-
-    private void ShowSkipButton()
-    {
-        skipButton.gameObject.SetActive(true);
-    }
-
-    private void HideSkipButton()
-    {
-        skipButton.gameObject.SetActive(false);
     }
 }

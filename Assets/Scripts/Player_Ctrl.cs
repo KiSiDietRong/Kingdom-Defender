@@ -33,6 +33,8 @@ public class Player_Ctrl : MonoBehaviour
     private Vector3 respawn;
 
     private Coroutine regenCoroutine;
+
+    private Collider2D[] colliders;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -46,6 +48,7 @@ public class Player_Ctrl : MonoBehaviour
         AudioManage.Instance.PlayMusic("BattleTheme");
 
         respawn = transform.position;
+        colliders = GetComponents<Collider2D>();
     }
     void Update()
     {
@@ -53,7 +56,10 @@ public class Player_Ctrl : MonoBehaviour
         {
             MovePlayer(moveSpeed);
         }
-        Attack();
+        if (!isDead)
+        {
+            Attack();
+        }
         if (!isMoving && !isAttack && !isDead)
         {
             if (regenCoroutine == null)
@@ -73,6 +79,8 @@ public class Player_Ctrl : MonoBehaviour
 
     private void MovePlayer(float moveSpeed)
     {
+        if (isDead) return;
+
         float xValue = (Input.GetAxis("Horizontal")) * moveSpeed * Time.deltaTime;
         float yValue = (Input.GetAxis("Vertical")) * moveSpeed * Time.deltaTime;
 
@@ -98,6 +106,8 @@ public class Player_Ctrl : MonoBehaviour
     }
     void Attack()
     {
+        if (isDead) return;
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemies);
         if(hitEnemies.Length > 0 && !isAttack)
         {
@@ -107,6 +117,7 @@ public class Player_Ctrl : MonoBehaviour
     }
     private IEnumerator AttackAnimation()
     {
+        if (isDead) yield break;
         isAttack = true;
         ChangeAnimation("player1_atk");
         AudioManage.Instance.PlaySFX("Attack");
@@ -117,7 +128,7 @@ public class Player_Ctrl : MonoBehaviour
         //    enemyCollider.GetComponent<Enemy_Ctrl>().TakeDamage(UnityEngine.Random.Range(minDMG, maxDMG + 1));
         //}
         //yield return new WaitForSeconds(PlayerAnim.GetCurrentAnimatorStateInfo(0).length - 0.2f);
-        if (enemy != null)
+        if (enemy != null && !isDead)
         {
             int damage = UnityEngine.Random.Range(minDMG, maxDMG);
             enemy.GetComponent<Enemy_Ctrl>().TakeDamage(damage);
@@ -166,6 +177,10 @@ public class Player_Ctrl : MonoBehaviour
     private IEnumerator HandleDeath()
     {
         ChangeAnimation("player1_die");
+        foreach (var collider in colliders)
+        {
+            collider.enabled = false;
+        }
         yield return new WaitForSeconds(PlayerAnim.GetCurrentAnimatorStateInfo(0).length);
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(10);
@@ -201,12 +216,16 @@ public class Player_Ctrl : MonoBehaviour
         isDead = false;
         StartCoroutine(FadeIn());
         ChangeAnimation("player1_ani");
+        foreach (var collider in colliders)
+        {
+            collider.enabled = true;
+        }
     }
     private IEnumerator RegenerateHealth()
     {
         while (true)
         {
-            if (currentHealth < maxHealth)
+            if (currentHealth < maxHealth && !isDead)
             {
                 currentHealth += 1;
                 healthSlider.value = currentHealth;
