@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 5923156423768402310}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.014135992, y: -0.7887929, z: -0.026617788}
+  m_LocalPosition: {x: 0.014135992, y: -0.872, z: -0.026617788}
   m_LocalScale: {x: 0.14136073, y: 0.14136073, z: 0.14136073}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ca209c924027340aa512b18afd2cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierPrefab: {fileID: 0}
+  soldierPrefab: {fileID: 765075119326282401, guid: 0a08dce9ca1afea4b9912d4f7e360293, type: 3}
   spawnPoints:
   - {fileID: 7876764512828834870}
   - {fileID: 759741508291326195}
