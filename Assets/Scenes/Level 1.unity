@@ -26123,7 +26123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &659443758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36837,9 +36837,11 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 6952961952523068279, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
   startButton: {fileID: 1581814588}
+  skipWaveButton: {fileID: 1737825155}
   countdownText: {fileID: 115526701}
   waveCounterText: {fileID: 208339037}
   enemyPerSec: 0.5
+  skipWaveDelay: 10
   waves:
   - enemyCounts: 05000000
     timeUntilNextWave: 40

@@ -146,9 +146,7 @@ public class Player_Ctrl : MonoBehaviour
             }
             previousAni = currentAni;
             currentAni = AniName;
-            PlayerAnim.SetTrigger(currentAni);
-            Debug.Log("Doi hoat anh thanh: " + currentAni);
-            
+            PlayerAnim.SetTrigger(currentAni);            
         }
     }
     private void OnDrawGizmosSelected()
