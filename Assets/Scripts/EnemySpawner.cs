@@ -22,13 +22,15 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int totalWaves = 7;
 
     [Header("Main House Settings")]
-    [SerializeField] private int mainHouseHealth = 20;
-    [SerializeField] private Image[] starImages; 
+    [SerializeField] private BaseHealth baseHealth;
+    [SerializeField] private Image[] starImages;
+    [SerializeField] private Sprite grayStar; // Gray star image
+    [SerializeField] private Sprite goldStar; // Gold star image
 
     [Header("Victory Screen")]
-    [SerializeField] private GameObject victoryPanel; 
-    [SerializeField] private Button restartButton; 
-    [SerializeField] private Button mainMenuButton; 
+    [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private Button restartButton;
+    [SerializeField] private Button mainMenuButton;
 
     private int currentWaveIndex = 0;
     private int enemyAlive;
@@ -89,12 +91,19 @@ public class EnemySpawner : MonoBehaviour
         if (currentWaveIndex < waves.Length - 1)
         {
             currentWaveIndex++;
-            StartWaveCountdown(); 
+            StartWaveCountdown();
         }
         else
         {
-            ShowVictoryScreen(); 
+            StartCoroutine(ShowVictoryScreenAfterDelay(3f));
         }
+    }
+
+    private IEnumerator ShowVictoryScreenAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Time.timeScale = 0; // Pause the game
+        ShowVictoryScreen();
     }
 
     private void StartNextWave()
@@ -158,7 +167,7 @@ public class EnemySpawner : MonoBehaviour
     public void StartWaveSequence()
     {
         startButton.gameObject.SetActive(false);
-        StartNextWave(); 
+        StartNextWave();
     }
 
     private void EnemyDestroy()
@@ -186,7 +195,7 @@ public class EnemySpawner : MonoBehaviour
     {
         victoryPanel.SetActive(true);
 
-        int stars = CalculateStars(mainHouseHealth);
+        int stars = CalculateStars(baseHealth.currentHeart);
         UpdateStarsDisplay(stars);
     }
 
@@ -196,7 +205,7 @@ public class EnemySpawner : MonoBehaviour
         {
             return 3;
         }
-        else if (remainingHealth >= 10)
+        else if (remainingHealth >= 13)
         {
             return 2;
         }
@@ -212,11 +221,11 @@ public class EnemySpawner : MonoBehaviour
         {
             if (i < stars)
             {
-                starImages[i].gameObject.SetActive(true);
+                starImages[i].sprite = goldStar; // Set to gold star
             }
             else
             {
-                starImages[i].gameObject.SetActive(false);
+                starImages[i].sprite = grayStar; // Set to gray star
             }
         }
     }
@@ -235,11 +244,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void RestartGame()
     {
+        Time.timeScale = 1; // Unpause the game
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
     private void GoToMainMenu()
     {
+        Time.timeScale = 1; // Unpause the game
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level Menu");
     }
 }
