@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -20,6 +20,15 @@ public class EnemySpawner : MonoBehaviour
     [Header("Wave Settings")]
     [SerializeField] private Wave[] waves;
     [SerializeField] private int totalWaves = 7;
+
+    [Header("Main House Settings")]
+    [SerializeField] private int mainHouseHealth = 20;
+    [SerializeField] private Image[] starImages; 
+
+    [Header("Victory Screen")]
+    [SerializeField] private GameObject victoryPanel; 
+    [SerializeField] private Button restartButton; 
+    [SerializeField] private Button mainMenuButton; 
 
     private int currentWaveIndex = 0;
     private int enemyAlive;
@@ -44,6 +53,11 @@ public class EnemySpawner : MonoBehaviour
         ShowStartButton();
         UpdateWaveCounterText();
         UpdateCountdownText(timeRemaining);
+
+        restartButton.onClick.AddListener(RestartGame);
+        mainMenuButton.onClick.AddListener(GoToMainMenu);
+
+        victoryPanel.SetActive(false);
     }
 
     private void Update()
@@ -74,14 +88,12 @@ public class EnemySpawner : MonoBehaviour
 
         if (currentWaveIndex < waves.Length - 1)
         {
-            // Move to the next wave directly after finishing current wave
             currentWaveIndex++;
-            StartWaveCountdown(); // Start the countdown for the next wave
+            StartWaveCountdown(); 
         }
         else
         {
-            Debug.Log("All waves completed!");
-            // Optionally, you can handle the end of all waves here
+            ShowVictoryScreen(); 
         }
     }
 
@@ -96,11 +108,9 @@ public class EnemySpawner : MonoBehaviour
             UpdateCountdownText(timeRemaining);
             isSpawning = true;
 
-            // Reset countdown for the next wave
             StopCoroutine("WaveDurationCountdown");
             waveCountdownRunning = false;
 
-            // Start spawning enemies immediately
             StartCoroutine(WaveDurationCountdown());
         }
     }
@@ -127,13 +137,11 @@ public class EnemySpawner : MonoBehaviour
         UpdateCountdownText(timeRemaining);
         waveCountdownRunning = false;
 
-        // Move to the next wave
         StartNextWave();
     }
 
     private IEnumerator WaveDurationCountdown()
     {
-        // Start countdown for the wave's duration
         while (timeRemaining > 0)
         {
             UpdateCountdownText(timeRemaining);
@@ -144,14 +152,13 @@ public class EnemySpawner : MonoBehaviour
         timeRemaining = 0;
         UpdateCountdownText(timeRemaining);
 
-        // Move to the next wave
         EndWave();
     }
 
     public void StartWaveSequence()
     {
         startButton.gameObject.SetActive(false);
-        StartNextWave(); // Start the first wave immediately
+        StartNextWave(); 
     }
 
     private void EnemyDestroy()
@@ -175,6 +182,45 @@ public class EnemySpawner : MonoBehaviour
         waveCounterText.text = $"Wave: {currentWaveIndex + 1}/{totalWaves}";
     }
 
+    private void ShowVictoryScreen()
+    {
+        victoryPanel.SetActive(true);
+
+        int stars = CalculateStars(mainHouseHealth);
+        UpdateStarsDisplay(stars);
+    }
+
+    private int CalculateStars(int remainingHealth)
+    {
+        if (remainingHealth >= 15)
+        {
+            return 3;
+        }
+        else if (remainingHealth >= 10)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    private void UpdateStarsDisplay(int stars)
+    {
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            if (i < stars)
+            {
+                starImages[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                starImages[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
     [System.Serializable]
     public class Wave
     {
@@ -185,5 +231,15 @@ public class EnemySpawner : MonoBehaviour
     private void ShowStartButton()
     {
         startButton.gameObject.SetActive(true);
+    }
+
+    private void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void GoToMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level Menu");
     }
 }
