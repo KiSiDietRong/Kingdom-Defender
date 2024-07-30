@@ -44,7 +44,7 @@ public class thap : MonoBehaviour
     {
         float distanceToClosestEnemy = Mathf.Infinity;
         GameObject closestEnemy = null;
-        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("enemy");
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemies");
 
         foreach (GameObject currentEnemy in allEnemies)
         {
