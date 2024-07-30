@@ -9,6 +9,7 @@ public class LevelChosing : MonoBehaviour
     public GameObject levelsButton;
     public GameObject loadingPanel; 
     public Slider progressBar; 
+
     private void Awake()
     {
         ButtonToArray();
