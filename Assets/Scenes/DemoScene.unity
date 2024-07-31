@@ -3810,6 +3810,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 163364580992698645, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853233193491295322, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3265659901778501735, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.2
@@ -3853,6 +3861,10 @@ PrefabInstance:
     - target: {fileID: 4799686614941078993, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
       propertyPath: m_Name
       value: S_Walk_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917467274062274354, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36512,10 +36524,13 @@ MonoBehaviour:
   moveSpeed: 1000
   PlayerAnim: {fileID: 5258164869982593979}
   attackRange: 1
+  minDMG: 10
+  maxDMG: 20
   sprite: {fileID: 7600057678877330234}
   enemies:
     serializedVersion: 2
     m_Bits: 0
+  healthSlider: {fileID: 0}
 --- !u!483693784 &6134313305481916573
 TilemapRenderer:
   m_ObjectHideFlags: 0

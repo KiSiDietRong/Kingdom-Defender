@@ -83,6 +83,7 @@ MonoBehaviour:
     m_Bits: 64
   arrowPrefab: {fileID: 1358834198188692622, guid: 07b78cffbc6db0d4485408c8688280f8, type: 3}
   firingPoint: {fileID: 8163916132870401532}
+  animator: {fileID: 7272632209005142032}
   TargetingRange: 15
   rotationspeed: 0
   bps: 1
@@ -96,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 135382394637003935}
   - component: {fileID: 7362897512653433235}
+  - component: {fileID: 7272632209005142032}
   m_Layer: 0
   m_Name: tower
   m_TagString: Untagged
@@ -113,7 +115,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.18, y: 0.49, z: 0.0000000037253}
-  m_LocalScale: {x: 2.2730916, y: 2.2730916, z: 2.2730916}
+  m_LocalScale: {x: -2.273092, y: 2.2730916, z: 2.2730916}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1411578655995592510}
@@ -170,6 +172,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7272632209005142032
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3654734199894083311}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb1990af502f7ac48913885be5aac40c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4371672547086566515
 GameObject:
   m_ObjectHideFlags: 0

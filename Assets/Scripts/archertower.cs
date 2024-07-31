@@ -11,6 +11,7 @@ public class archertower: MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private Animator animator;
 
 
 
@@ -50,6 +51,7 @@ public class archertower: MonoBehaviour
 
     private void Shoot()
     {
+        animator.SetTrigger("shooting");
         GameObject arrowObj = Instantiate(arrowPrefab, firingPoint.position, Quaternion.identity);
         arrow arrowScript = arrowObj.GetComponent<arrow>();
         arrowScript.SetTarget(Target);

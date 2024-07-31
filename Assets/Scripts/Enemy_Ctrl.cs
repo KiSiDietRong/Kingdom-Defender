@@ -23,6 +23,7 @@ public class Enemy_Ctrl : MonoBehaviour
     [SerializeField] private int maxDamage = 12;
     [SerializeField] private LayerMask playerLayer;
 
+
     private Transform target;
     private Transform player;
     private bool isAttacking = false;

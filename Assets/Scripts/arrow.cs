@@ -11,6 +11,7 @@ public class arrow : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private float arrowspeed = 5f;
+    [SerializeField] private int arrowdmg = 10;
 
 
     private Transform target;
@@ -26,10 +27,26 @@ public class arrow : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
         rb.velocity = direction * arrowspeed;
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    //private void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    Enemy_Ctrl enemy = other.gameObject.GetComponent<Enemy_Ctrl>();
+    //    if (enemy != null)
+    //    {
+    //        enemy.TakeDamage(dmg);
+    //    }
+
+    //    //other.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(arrowdmg);
+
+    //    //Destroy(gameObject);
+    //}
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        Enemy_Ctrl enemy = collision.gameObject.GetComponent<Enemy_Ctrl>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(arrowdmg);
+        }
         Destroy(gameObject);
     }
-
 
 }

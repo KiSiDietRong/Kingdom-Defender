@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 163364580992698645}
-  moveSpeed: 10
+  moveSpeed: 4
   maxHealth: 20
   healthSlider: {fileID: 9151350543447720900}
   atkRange: 1.4
