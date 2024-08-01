@@ -16,8 +16,8 @@ public class GoToTitle : MonoBehaviour
     {
         
     }
-    public void GoToTitleScene()
-    {
-        SceneManager.LoadScene("TitleScene");
-    }
+    //public void GoToTitleScene()
+    //{
+    //    SceneManager.LoadScene("TitleScene");
+    //}
 }
