@@ -1,45 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Enemy_Ctrl : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Collider2D enemyCollider;
 
     [Header("Attributes")]
     [SerializeField] private float moveSpeed = 2;
-    [SerializeField] private int maxHealth = 20;
-    [SerializeField] private Slider healthSlider;
     private string currentAni;
     private Animator EnemyAni;
-    private int currentHealth;
 
     [Header("Attack Attributes")]
     [SerializeField] private float atkRange = 1.0f;
     [SerializeField] private float atkSpeed = 1.0f;
-    [SerializeField] private int minDamage = 7;
-    [SerializeField] private int maxDamage = 12;
+    [SerializeField] private int dmg = 10;
     [SerializeField] private LayerMask playerLayer;
-
 
     private Transform target;
     private Transform player;
     private bool isAttacking = false;
-    private bool isDead = false;
-
     private int pathIndex = 0;
     private void Start()
     {
         target = LevelManager.main.path[pathIndex];
         EnemyAni = GetComponent<Animator>();
-        enemyCollider = GetComponent<Collider2D>();
 
-        currentHealth = maxHealth;
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = currentHealth;
     }
 
     private void Update()
@@ -73,8 +60,6 @@ public class Enemy_Ctrl : MonoBehaviour
     }
     private void EnemyAtk()
     {
-        if (isDead) return;
-
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position, atkRange, playerLayer);
 
         if (hitPlayers.Length > 0)
@@ -95,14 +80,12 @@ public class Enemy_Ctrl : MonoBehaviour
     private IEnumerator PlayAttackAnimation()
     {
         isAttacking = true;
-        ChangeAnimation("atk");
-        AudioManage.Instance.PlaySFX("EnemyAtk");
+        ChangeAnimation("atk"); 
         yield return new WaitForSeconds(atkSpeed);
-        if (player != null)
-        {
-            int damage = Random.Range(minDamage, maxDamage);
-            player.GetComponent<Player_Ctrl>().TakeDamage(damage);
-        }
+        //if (player != null)
+        //{
+        //    player.GetComponent<PlayerHealth>().TakeDamage(dmg);
+        //}
         isAttacking = false;
         ChangeAnimation("walk");
     }
@@ -119,35 +102,5 @@ public class Enemy_Ctrl : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, atkRange);
-    }
-
-    public void TakeDamage(int dmg)
-    {
-        if (isDead) return;
-
-        currentHealth -= dmg;
-        healthSlider.value = currentHealth;
-        if (currentHealth <= 0 && !isDead)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        isDead = true;
-        rb.velocity = Vector2.zero;
-        enemyCollider.enabled = false;
-        ChangeAnimation("die");
-        //EnemySpawner.onEnemyDestroy.Invoke();
-        //Destroy(gameObject, 1f);
-        StartCoroutine(EnemyDeath());
-    }
-
-    private IEnumerator EnemyDeath()
-    {
-        yield return new WaitForSeconds(EnemyAni.GetCurrentAnimatorStateInfo(0).length); 
-        EnemySpawner.onEnemyDestroy.Invoke();
-        Destroy(gameObject);
     }
 }

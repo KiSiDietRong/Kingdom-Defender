@@ -1,22 +1,38 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
+=======
+using System.Collections;
+using System.Collections.Generic;
+>>>>>>> Toàn
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class EnemySpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject[] enemyPrefabs;
+<<<<<<< HEAD
     [SerializeField] private Button startButton;
     [SerializeField] private Text countdownText;
     [SerializeField] private Text waveCounterText;
+=======
+
+>>>>>>> Toàn
 
     [Header("Attributes")]
+    [SerializeField] private int baseEnemy = 8;
     [SerializeField] private float enemyPerSec = 0.5f;
+<<<<<<< HEAD
+=======
+    [SerializeField] private float timeBetweenWave = 5f;
+    [SerializeField] private float difficultyScallingFactor = 0.75f;
+>>>>>>> Toàn
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
 
+<<<<<<< HEAD
     [Header("Wave Settings")]
     [SerializeField] private Wave[] waves;
     [SerializeField] private int totalWaves = 7;
@@ -33,14 +49,21 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
 
     private int currentWaveIndex = 0;
+=======
+    private int currentWave = 1;
+    private float timeSinceLastSpawn;
+>>>>>>> Toàn
     private int enemyAlive;
     private int enemyLeftToSpawn;
     private bool isSpawning = false;
     private bool waveCountdownRunning = false;
 
+<<<<<<< HEAD
     private float timeSinceLastSpawn;
     private float timeRemaining;
 
+=======
+>>>>>>> Toàn
     private void Awake()
     {
         if (waves.Length > 0)
@@ -48,9 +71,9 @@ public class EnemySpawner : MonoBehaviour
             timeRemaining = waves[currentWaveIndex].timeUntilNextWave;
         }
     }
-
     private void Start()
     {
+<<<<<<< HEAD
         startButton.onClick.AddListener(StartWaveSequence);
         ShowStartButton();
         UpdateWaveCounterText();
@@ -60,14 +83,24 @@ public class EnemySpawner : MonoBehaviour
         mainMenuButton.onClick.AddListener(GoToMainMenu);
 
         victoryPanel.SetActive(false);
+=======
+        StartCoroutine(StartWave());
+>>>>>>> Toàn
     }
-
     private void Update()
     {
-        if (isSpawning)
-        {
-            timeSinceLastSpawn += Time.deltaTime;
+        if (!isSpawning) return;
+        timeSinceLastSpawn += Time.deltaTime;
 
+        if(timeSinceLastSpawn >= (1f / enemyPerSec) && enemyLeftToSpawn > 0)
+        {
+            SpawnEnemy();
+            enemyLeftToSpawn--;
+            enemyAlive++;
+            timeSinceLastSpawn = 0f;
+        }
+
+<<<<<<< HEAD
             if (timeSinceLastSpawn >= (1f / enemyPerSec) && enemyLeftToSpawn > 0)
             {
                 SpawnEnemy();
@@ -80,6 +113,11 @@ public class EnemySpawner : MonoBehaviour
             {
                 EndWave();
             }
+=======
+        if (enemyAlive == 0 && enemyLeftToSpawn == 0)
+        {
+            EndWave();
+>>>>>>> Toàn
         }
     }
 
@@ -87,6 +125,7 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawning = false;
         timeSinceLastSpawn = 0f;
+<<<<<<< HEAD
 
         if (currentWaveIndex < waves.Length - 1)
         {
@@ -170,16 +209,28 @@ public class EnemySpawner : MonoBehaviour
         StartNextWave();
     }
 
+=======
+        currentWave++;
+        StartCoroutine(StartWave());
+    }
+>>>>>>> Toàn
     private void EnemyDestroy()
     {
         enemyAlive--;
     }
-
+    private IEnumerator StartWave()
+    {
+        yield return new WaitForSeconds(timeBetweenWave);
+        isSpawning = true;
+        enemyLeftToSpawn = baseEnemy;
+    }
+    
     private void SpawnEnemy()
     {
-        GameObject prefabToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-        Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+        GameObject preFabsSpawn = enemyPrefabs[0];
+        Instantiate(preFabsSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
+<<<<<<< HEAD
 
     private void UpdateCountdownText(float timeRemaining)
     {
@@ -252,5 +303,10 @@ public class EnemySpawner : MonoBehaviour
     {
         Time.timeScale = 1; // Unpause the game
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level Menu");
+=======
+    private int EnemiesPerWave()
+    {
+        return Mathf.RoundToInt(baseEnemy * Mathf.Pow(currentWave, difficultyScallingFactor));
+>>>>>>> Toàn
     }
 }

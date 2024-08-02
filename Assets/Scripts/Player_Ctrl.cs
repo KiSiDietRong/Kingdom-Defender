@@ -1,20 +1,55 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player_Ctrl : MonoBehaviour
 {
+    #region Enemy_Code
+    //[Header("References")]
+    //[SerializeField] private Rigidbody2D rb;
+
+    //[Header("Attributes")]
+    //[SerializeField] private float moveSpeed = 2;
+
+    //private Transform target;
+    //private int pathIndex = 0;
+    //private void Start()
+    //{
+    //    target = LevelManager.main.path[pathIndex];
+    //}
+
+    //private void Update()
+    //{
+    //    if (Vector2.Distance(target.position, transform.position) <= 0.1f)
+    //    {
+    //        pathIndex++;
+
+    //        if (pathIndex == LevelManager.main.path.Length)
+    //        {
+    //            Destroy(gameObject);
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            target = LevelManager.main.path[pathIndex];
+    //        }
+    //    }
+    //}
+
+    //private void FixedUpdate()
+    //{
+    //    Vector2 dir = (target.position - transform.position).normalized;
+
+    //    rb.velocity = dir * moveSpeed;
+    //}
+    #endregion
+
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] private Animator PlayerAnim;
     [SerializeField] private float attackRange = 1.0f;
-    [SerializeField] private int minDMG = 10;
-    [SerializeField] private int maxDMG = 20;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private LayerMask enemies;
-    [SerializeField] private Slider healthSlider;
 
     private Rigidbody2D rb;
     private string currentAni;
@@ -24,8 +59,10 @@ public class Player_Ctrl : MonoBehaviour
 
     private bool isAttack = false;
     private bool isMoving = false;
-    private bool isDead = false;
+    //public AudioClip walkClip;
+    //AudioSource playerSource;
 
+<<<<<<< HEAD
     private int maxHealth = 100;
     private int currentHealth;
     private Transform enemy;
@@ -35,11 +72,14 @@ public class Player_Ctrl : MonoBehaviour
     private Coroutine regenCoroutine;
 
     private Collider2D[] colliders;
+=======
+>>>>>>> Toàn
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         PlayerAnim = GetComponent<Animator>();
         targetPosition = transform.position;
+<<<<<<< HEAD
 
         currentHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
@@ -49,13 +89,16 @@ public class Player_Ctrl : MonoBehaviour
 
         respawn = transform.position;
         colliders = GetComponents<Collider2D>();
+=======
+>>>>>>> Toàn
     }
     void Update()
     {
-        if(!isAttack && !isDead)
+        if(!isAttack)
         {
             MovePlayer(moveSpeed);
         }
+<<<<<<< HEAD
         if (!isDead)
         {
             Attack();
@@ -75,6 +118,9 @@ public class Player_Ctrl : MonoBehaviour
                 regenCoroutine = null;
             }
         }
+=======
+        Attack();
+>>>>>>> Toàn
     }
 
     private void MovePlayer(float moveSpeed)
@@ -111,7 +157,6 @@ public class Player_Ctrl : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemies);
         if(hitEnemies.Length > 0 && !isAttack)
         {
-            enemy = hitEnemies[0].transform;
             StartCoroutine(AttackAnimation());
         }
     }
@@ -122,6 +167,7 @@ public class Player_Ctrl : MonoBehaviour
         ChangeAnimation("player1_atk");
         AudioManage.Instance.PlaySFX("Attack");
         yield return new WaitForSeconds(PlayerAnim.GetCurrentAnimatorStateInfo(0).length);
+<<<<<<< HEAD
         //Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemies);
         //foreach (Collider2D enemyCol in hitEnemies)
         //{
@@ -133,6 +179,8 @@ public class Player_Ctrl : MonoBehaviour
             int damage = UnityEngine.Random.Range(minDMG, maxDMG);
             enemy.GetComponent<Enemy_Ctrl>().TakeDamage(damage);
         }
+=======
+>>>>>>> Toàn
         isAttack = false;
         ChangeAnimation("player1_ani");
     }
@@ -154,6 +202,7 @@ public class Player_Ctrl : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+<<<<<<< HEAD
 
     public void TakeDamage(int dmg)
     {
@@ -231,4 +280,6 @@ public class Player_Ctrl : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
+=======
+>>>>>>> Toàn
 }
