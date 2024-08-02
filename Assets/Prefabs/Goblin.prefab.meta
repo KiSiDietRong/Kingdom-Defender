@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Goblin.prefab.meta
 guid: 1daf431dd2101514bb1e149a330c7280
+========
+guid: 35c386d41bd8c0c47b0ade414687647b
+>>>>>>>> Toàn:Assets/Prefabs/Player.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
