@@ -25,7 +25,7 @@ public class AudioManage : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic("Theme");
+        PlayMusic("Theme");    
     }
 
     public void PlayMusic(string name)
@@ -55,25 +55,5 @@ public class AudioManage : MonoBehaviour
         {
             sfxSource.PlayOneShot(s.clip);
         }
-    }
-
-    public void ToggleMusic()
-    {
-        musicSource.mute = !musicSource.mute;
-    }
-
-    public void ToggleSFX()
-    {
-        sfxSource.mute = !sfxSource.mute;
-    }
-
-    public void MusicVolumn(float volumn)
-    {
-        musicSource.volume = volumn;
-    }
-
-    public void SFXVolumn(float volumn)
-    {
-        sfxSource.volume = volumn;
     }
 }
