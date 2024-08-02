@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: -3986739762562096497}
   - component: {fileID: 911642738006151225}
   - component: {fileID: -2724672446124485425}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: D_Block
-  m_TagString: soldier
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,18 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9c409fefa1a9f4ea2ad0ac31a2bf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-    serializedVersion: 2
-    m_Bits: 64
   detectionRange: 5
   attackRange: 1
   moveSpeed: 10
   minDamage: 5
   maxDamage: 10
   attackCooldown: 1.5
-  barrackTower: {fileID: 2598861140581643474, guid: b76c05d95feadf740a5edc3a3888c835, type: 3}
-  maxDistanceFromBarrack: 10
-  maxHealth: 20
+  maxHealth: 5
+  healthSliderPrefab: {fileID: 7073635651570460455, guid: de781164bfed9f540adc0604ef47c9b8, type: 3}
 --- !u!61 &911642738006151225
 BoxCollider2D:
   m_ObjectHideFlags: 0
