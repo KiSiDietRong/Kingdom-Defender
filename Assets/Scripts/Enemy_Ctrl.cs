@@ -127,7 +127,7 @@ public class Enemy_Ctrl : MonoBehaviour
 
         currentHealth -= dmg;
         healthSlider.value = currentHealth;
-        if (currentHealth < 0 && !isDead)
+        if (currentHealth <= 0 && !isDead)
         {
             Die();
         }
