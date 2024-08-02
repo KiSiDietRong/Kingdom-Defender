@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -8,46 +8,58 @@ public class EnemySpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private Button startButton;
-    [SerializeField] private Button skipButton;
     [SerializeField] private Text countdownText;
+    [SerializeField] private Text waveCounterText;
 
     [Header("Attributes")]
     [SerializeField] private float enemyPerSec = 0.5f;
-    [SerializeField] private float timeBetweenWave = 5f;
-    [SerializeField] private float startDelay = 3f;
-    [SerializeField] private float skipButtonDelay = 5f;
-    [SerializeField] private float skipDelay = 2f;
-    [SerializeField] private float difficultyScalingFactor = 0.75f;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
 
     [Header("Wave Settings")]
     [SerializeField] private Wave[] waves;
+    [SerializeField] private int totalWaves = 7;
+
+    [Header("Main House Settings")]
+    [SerializeField] private BaseHealth baseHealth;
+    [SerializeField] private Image[] starImages;
+    [SerializeField] private Sprite grayStar; // Gray star image
+    [SerializeField] private Sprite goldStar; // Gold star image
+
+    [Header("Victory Screen")]
+    [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private Button restartButton;
+    [SerializeField] private Button mainMenuButton;
 
     private int currentWaveIndex = 0;
     private int enemyAlive;
     private int enemyLeftToSpawn;
     private bool isSpawning = false;
+    private bool waveCountdownRunning = false;
 
-    private float timeUntilNextWave;
     private float timeSinceLastSpawn;
-
-    private Coroutine startDelayCoroutine;
-    private Coroutine skipButtonDelayCoroutine;
-    private Coroutine skipDelayCoroutine;
-    private Coroutine waveCountdownCoroutine;
+    private float timeRemaining;
 
     private void Awake()
     {
-        onEnemyDestroy.AddListener(EnemyDestroy);
+        if (waves.Length > 0)
+        {
+            timeRemaining = waves[currentWaveIndex].timeUntilNextWave;
+        }
     }
 
     private void Start()
     {
         startButton.onClick.AddListener(StartWaveSequence);
-        skipButton.onClick.AddListener(SkipWave);
         ShowStartButton();
+        UpdateWaveCounterText();
+        UpdateCountdownText(timeRemaining);
+
+        restartButton.onClick.AddListener(RestartGame);
+        mainMenuButton.onClick.AddListener(GoToMainMenu);
+
+        victoryPanel.SetActive(false);
     }
 
     private void Update()
@@ -64,7 +76,7 @@ public class EnemySpawner : MonoBehaviour
                 timeSinceLastSpawn = 0f;
             }
 
-            if (enemyAlive == 0 && enemyLeftToSpawn == 0)
+            if (enemyAlive == 0 && enemyLeftToSpawn == 0 && !waveCountdownRunning)
             {
                 EndWave();
             }
@@ -75,64 +87,87 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawning = false;
         timeSinceLastSpawn = 0f;
-        currentWaveIndex++;
-        if (currentWaveIndex < waves.Length)
+
+        if (currentWaveIndex < waves.Length - 1)
         {
-            StartCoroutine(StartSkipButtonDelay());
+            currentWaveIndex++;
+            StartWaveCountdown();
         }
         else
         {
-            Debug.Log("All waves completed!");
+            StartCoroutine(ShowVictoryScreenAfterDelay(3f));
         }
     }
 
-    private IEnumerator StartSkipButtonDelay()
+    private IEnumerator ShowVictoryScreenAfterDelay(float delay)
     {
-        ShowSkipButton();
-        yield return new WaitForSeconds(skipButtonDelay);
-        HideSkipButton();
+        yield return new WaitForSeconds(delay);
+        Time.timeScale = 0; // Pause the game
+        ShowVictoryScreen();
+    }
+
+    private void StartNextWave()
+    {
+        if (currentWaveIndex < waves.Length)
+        {
+            Wave currentWave = waves[currentWaveIndex];
+            enemyLeftToSpawn = currentWave.enemyCounts[0];
+            timeRemaining = currentWave.timeUntilNextWave;
+            UpdateWaveCounterText();
+            UpdateCountdownText(timeRemaining);
+            isSpawning = true;
+
+            StopCoroutine("WaveDurationCountdown");
+            waveCountdownRunning = false;
+
+            StartCoroutine(WaveDurationCountdown());
+        }
+    }
+
+    private void StartWaveCountdown()
+    {
+        if (!waveCountdownRunning)
+        {
+            waveCountdownRunning = true;
+            StartCoroutine(CountdownCoroutine());
+        }
+    }
+
+    private IEnumerator CountdownCoroutine()
+    {
+        while (timeRemaining > 0)
+        {
+            UpdateCountdownText(timeRemaining);
+            yield return new WaitForSeconds(1f);
+            timeRemaining--;
+        }
+
+        timeRemaining = 0;
+        UpdateCountdownText(timeRemaining);
+        waveCountdownRunning = false;
+
         StartNextWave();
+    }
+
+    private IEnumerator WaveDurationCountdown()
+    {
+        while (timeRemaining > 0)
+        {
+            UpdateCountdownText(timeRemaining);
+            yield return new WaitForSeconds(1f);
+            timeRemaining--;
+        }
+
+        timeRemaining = 0;
+        UpdateCountdownText(timeRemaining);
+
+        EndWave();
     }
 
     public void StartWaveSequence()
     {
         startButton.gameObject.SetActive(false);
-        startDelayCoroutine = StartCoroutine(StartDelayCoroutine());
-    }
-
-    private IEnumerator StartDelayCoroutine()
-    {
-        yield return new WaitForSeconds(startDelay);
         StartNextWave();
-    }
-
-    private void StartNextWave()
-    {
-        isSpawning = true;
-        Wave currentWave = waves[currentWaveIndex];
-        enemyLeftToSpawn = currentWave.numEnemies;
-        timeSinceLastSpawn = 0f;
-        waveCountdownCoroutine = StartCoroutine(StartWaveCountdown());
-    }
-
-    private IEnumerator StartWaveCountdown()
-    {
-        timeUntilNextWave = timeBetweenWave;
-        UpdateCountdownText();
-        while (timeUntilNextWave > 0)
-        {
-            yield return new WaitForSeconds(1f);
-            timeUntilNextWave--;
-            UpdateCountdownText();
-        }
-        StartNextWave();
-    }
-
-    public void SkipWave()
-    {
-        HideSkipButton();
-        StopCoroutine(waveCountdownCoroutine);
-        EndWave();
     }
 
     private void EnemyDestroy()
@@ -146,30 +181,76 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
 
-    private void UpdateCountdownText()
+    private void UpdateCountdownText(float timeRemaining)
     {
-        countdownText.text = "Next wave in: " + timeUntilNextWave.ToString() + "s";
+        countdownText.text = $"Time left: {Mathf.CeilToInt(timeRemaining)}s";
+    }
+
+    private void UpdateWaveCounterText()
+    {
+        waveCounterText.text = $"Wave: {currentWaveIndex + 1}/{totalWaves}";
+    }
+
+    private void ShowVictoryScreen()
+    {
+        victoryPanel.SetActive(true);
+
+        int stars = CalculateStars(baseHealth.currentHeart);
+        UpdateStarsDisplay(stars);
+    }
+
+    private int CalculateStars(int remainingHealth)
+    {
+        if (remainingHealth >= 15)
+        {
+            return 3;
+        }
+        else if (remainingHealth >= 13)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    private void UpdateStarsDisplay(int stars)
+    {
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            if (i < stars)
+            {
+                starImages[i].sprite = goldStar; // Set to gold star
+            }
+            else
+            {
+                starImages[i].sprite = grayStar; // Set to gray star
+            }
+        }
     }
 
     [System.Serializable]
     public class Wave
     {
-        public int numEnemies;
+        public int[] enemyCounts;
+        public float timeUntilNextWave;
     }
 
     private void ShowStartButton()
     {
         startButton.gameObject.SetActive(true);
-        skipButton.gameObject.SetActive(false);
     }
 
-    private void ShowSkipButton()
+    private void RestartGame()
     {
-        skipButton.gameObject.SetActive(true);
+        Time.timeScale = 1; // Unpause the game
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void HideSkipButton()
+    private void GoToMainMenu()
     {
-        skipButton.gameObject.SetActive(false);
+        Time.timeScale = 1; // Unpause the game
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level Menu");
     }
 }

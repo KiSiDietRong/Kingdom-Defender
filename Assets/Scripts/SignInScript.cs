@@ -48,6 +48,9 @@ public class SignInScript : MonoBehaviour
             {
                 notification.text = "Sign in successfully!";
                 PlayerPrefs.SetString("token", get);
+
+                PlayerPrefs.DeleteKey("PlayerName");
+
                 StartCoroutine(NextScene());
             }
         }

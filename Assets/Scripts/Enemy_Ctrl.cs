@@ -7,6 +7,7 @@ public class Enemy_Ctrl : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Collider2D enemyCollider;
 
     [Header("Attributes")]
     [SerializeField] private float moveSpeed = 2;
@@ -34,6 +35,7 @@ public class Enemy_Ctrl : MonoBehaviour
     {
         target = LevelManager.main.path[pathIndex];
         EnemyAni = GetComponent<Animator>();
+        enemyCollider = GetComponent<Collider2D>();
 
         currentHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
@@ -71,6 +73,8 @@ public class Enemy_Ctrl : MonoBehaviour
     }
     private void EnemyAtk()
     {
+        if (isDead) return;
+
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position, atkRange, playerLayer);
 
         if (hitPlayers.Length > 0)
@@ -119,6 +123,8 @@ public class Enemy_Ctrl : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
+        if (isDead) return;
+
         currentHealth -= dmg;
         healthSlider.value = currentHealth;
         if (currentHealth < 0 && !isDead)
@@ -130,15 +136,18 @@ public class Enemy_Ctrl : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        EnemySpawner.onEnemyDestroy.Invoke();
-        Destroy(gameObject, 1f);
-        //StartCoroutine(EnemyDeath());
+        rb.velocity = Vector2.zero;
+        enemyCollider.enabled = false;
+        ChangeAnimation("die");
+        //EnemySpawner.onEnemyDestroy.Invoke();
+        //Destroy(gameObject, 1f);
+        StartCoroutine(EnemyDeath());
     }
 
-    //private IEnumerator EnemyDeath()
-    //{
-    //    ChangeAnimation("die");
-    //    yield return new WaitForSeconds(EnemyAni.GetCurrentAnimatorStateInfo(0).length);
-    //    Destroy(gameObject);
-    //}
+    private IEnumerator EnemyDeath()
+    {
+        yield return new WaitForSeconds(EnemyAni.GetCurrentAnimatorStateInfo(0).length); 
+        EnemySpawner.onEnemyDestroy.Invoke();
+        Destroy(gameObject);
+    }
 }

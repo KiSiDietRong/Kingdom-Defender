@@ -7,8 +7,9 @@ public class LevelChosing : MonoBehaviour
 {
     public Button[] buttons;
     public GameObject levelsButton;
-    public GameObject loadingPanel; 
-    public Slider progressBar; 
+    public GameObject loadingPanel;
+    public Slider progressBar;
+
     private void Awake()
     {
         ButtonToArray();
@@ -31,27 +32,27 @@ public class LevelChosing : MonoBehaviour
 
     private IEnumerator LoadLevelAsync(string levelName)
     {
-    
+
         loadingPanel.SetActive(true);
 
-  
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName);
 
-        
+
         progressBar.value = 0;
         progressBar.maxValue = 1;
 
-        
+
         while (!asyncLoad.isDone)
         {
-           
+
             progressBar.value = asyncLoad.progress;
 
-            
+
             yield return null;
         }
 
-        
+
         loadingPanel.SetActive(false);
     }
 

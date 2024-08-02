@@ -10,8 +10,8 @@ public class StartAndSkip : MonoBehaviour
     {
         spawner.StartWaveSequence();
     }
-    public void SkipWaveBut()
-    {
-        spawner.SkipWave();
-    }
+    //public void SkipWaveBut()
+    //{
+    //    spawner.SkipWave();
+    //}
 }
