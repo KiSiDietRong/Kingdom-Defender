@@ -482,6 +482,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  soldierLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &2526564903707353275
 MonoBehaviour:
   m_ObjectHideFlags: 0

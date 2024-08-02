@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,9 +23,11 @@ public class Enemy_Ctrl : MonoBehaviour
     [SerializeField] private int minDamage = 7;
     [SerializeField] private int maxDamage = 12;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask soldierLayer;
 
     private Transform target;
     private Transform player;
+    private Transform soldier;
     private bool isAttacking = false;
     private bool isDead = false;
 
@@ -59,6 +61,7 @@ public class Enemy_Ctrl : MonoBehaviour
             }
         }
         EnemyAtk();
+        AttackSoldier();
     }
 
     private void FixedUpdate()
@@ -75,7 +78,7 @@ public class Enemy_Ctrl : MonoBehaviour
         if (isDead) return;
 
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position, atkRange, playerLayer);
-
+        Collider2D[] hitSoldier = Physics2D.OverlapCircleAll(transform.position, atkRange, soldierLayer);
         if (hitPlayers.Length > 0)
         {
             player = hitPlayers[0].transform;
@@ -89,7 +92,55 @@ public class Enemy_Ctrl : MonoBehaviour
         {
             player = null;
         }
+        //if (hitSoldier.Length > 0)
+        //{
+        //    soldier = hitSoldier[0].transform;
+        //    rb.velocity = Vector2.zero;
+        //    if (!isAttacking)
+        //    {
+        //        StartCoroutine(PlayAttackAnimation());
+        //    }
+        //}
+        //else
+        //{
+        //    soldier = null;
+        //}
     }
+    private void AttackSoldier()
+    {
+        if (isDead) return;
+
+        Collider2D[] hitSoldiers = Physics2D.OverlapCircleAll(transform.position, atkRange, soldierLayer);
+
+        if (hitSoldiers.Length > 0)
+        {
+            Transform soldier = hitSoldiers[0].transform;
+            rb.velocity = Vector2.zero;
+            if (!isAttacking)
+            {
+                StartCoroutine(PlayAttackAnimation(soldier));
+            }
+        }
+    }
+    private IEnumerator PlayAttackAnimation(Transform soldier)
+    {
+        isAttacking = true;
+        // Trigger attack animation if needed
+        yield return new WaitForSeconds(atkSpeed);
+
+        if (soldier != null)
+        {
+            int damage = Random.Range(minDamage, maxDamage);
+            var soldierCtrl = soldier.GetComponent<SoldierScript>();
+            if (soldierCtrl != null)
+            {
+                soldierCtrl.TakeDamage(damage);
+            }
+        }
+
+        isAttacking = false;
+    }
+
 
     private IEnumerator PlayAttackAnimation()
     {
@@ -101,6 +152,13 @@ public class Enemy_Ctrl : MonoBehaviour
         {
             int damage = Random.Range(minDamage, maxDamage);
             player.GetComponent<Player_Ctrl>().TakeDamage(damage);
+            
+        }
+        if (soldier != null)
+        {
+            int damage = Random.Range(minDamage, maxDamage);
+            
+            soldier.GetComponent<SoldierScript>().TakeDamage(damage);
         }
         isAttacking = false;
         ChangeAnimation("walk");
