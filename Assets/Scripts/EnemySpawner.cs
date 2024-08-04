@@ -209,6 +209,9 @@ public class EnemySpawner : MonoBehaviour
 
         int stars = CalculateStars(baseHealth.currentHeart);
         UpdateStarsDisplay(stars);
+
+        PlayerPrefs.SetInt("CurrentStars", stars);
+        PlayerPrefs.Save();
     }
 
     private int CalculateStars(int remainingHealth)
