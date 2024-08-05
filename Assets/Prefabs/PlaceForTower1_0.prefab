@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8731862543772068402}
   - component: {fileID: 5578276105253744852}
   - component: {fileID: 8952672813624103975}
+  - component: {fileID: 6533362552585081722}
   m_Layer: 0
   m_Name: PlaceForTower1_0
   m_TagString: Untagged
@@ -120,3 +121,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.31
+--- !u!114 &6533362552585081722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686016529035817105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344e32206efb16842b8169e7452023be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 5578276105253744852}
+  hoverColor: {r: 0.6754716, g: 0.6754716, b: 0.6754716, a: 0.6745098}
