@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
@@ -96,6 +97,17 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             StartCoroutine(ShowVictoryScreenAfterDelay(3f));
+            UnlockNewLevel();
+        }
+    }
+
+    void UnlockNewLevel()
+    {
+        if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.Save();
         }
     }
 
@@ -197,6 +209,9 @@ public class EnemySpawner : MonoBehaviour
 
         int stars = CalculateStars(baseHealth.currentHeart);
         UpdateStarsDisplay(stars);
+
+        PlayerPrefs.SetInt("CurrentStars", stars);
+        PlayerPrefs.Save();
     }
 
     private int CalculateStars(int remainingHealth)

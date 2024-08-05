@@ -10,6 +10,10 @@ public class LevelChosing : MonoBehaviour
     public GameObject loadingPanel;
     public Slider progressBar;
 
+    public Image[] starImages;
+    public Sprite grayStar;
+    public Sprite goldStar;
+    public Text starCountText;
     private void Awake()
     {
         ButtonToArray();
@@ -22,8 +26,29 @@ public class LevelChosing : MonoBehaviour
         {
             buttons[i].interactable = true;
         }
-    }
 
+        UpdateStarDisplay();
+    }
+    private void UpdateStarDisplay()
+    {
+        int currentStars = PlayerPrefs.GetInt("CurrentStars", 0);
+
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            if (i < currentStars)
+            {
+                starImages[i].sprite = goldStar;
+                starImages[i].enabled = true;
+            }
+            else
+            {
+                starImages[i].sprite = grayStar;
+                starImages[i].enabled = true;
+            }
+        }
+
+        starCountText.text = $"Stars: {currentStars}";
+    }
     public void OpenLevel(int lvlId)
     {
         string levelName = "Level " + lvlId;
