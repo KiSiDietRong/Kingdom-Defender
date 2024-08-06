@@ -1513,7 +1513,7 @@ GameObject:
   - component: {fileID: 320662650}
   - component: {fileID: 320662649}
   m_Layer: 5
-  m_Name: BarrackArmorBoost
+  m_Name: MageSlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2711,7 +2711,7 @@ GameObject:
   - component: {fileID: 617273979}
   - component: {fileID: 617273978}
   m_Layer: 5
-  m_Name: Armor
+  m_Name: Slow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2733,8 +2733,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.385, y: -0.0000047684}
-  m_SizeDelta: {x: 147.23, y: 138.53}
+  m_AnchoredPosition: {x: -0.000011444, y: -0.000022888}
+  m_SizeDelta: {x: 107.4403, y: 101.0915}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &617273978
 MonoBehaviour:
@@ -2800,7 +2800,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ba977c868d2c6b54289c5ee1974a360e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 28b31d7235a708847b61cbdc281faac6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
