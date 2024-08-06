@@ -7,6 +7,7 @@ public class BuildManager : MonoBehaviour
     public static BuildManager Main;
     [Header("References")]
     [SerializeField] private GameObject[] towerPrefabs;
+    [SerializeField] private MoneySetting moneySetting;
 
     private int selectedTower = 0;
 
@@ -17,5 +18,9 @@ public class BuildManager : MonoBehaviour
     public GameObject GetSelectedTower()
     {
         return towerPrefabs[selectedTower];
+    }
+    public bool TrySpendMoney(int amount)
+    {
+        return moneySetting.TrySpendMoney(amount);
     }
 }

@@ -24,7 +24,9 @@ public class Enemy_Ctrl : MonoBehaviour
     [SerializeField] private int maxDamage = 12;
     [SerializeField] private LayerMask playerLayer;
 
-
+    [Header("Money Setting")]
+    [SerializeField] private int minMoney = 10;
+    [SerializeField] private int maxMoney = 20;
     private Transform target;
     private Transform player;
     private bool isAttacking = false;
@@ -147,6 +149,13 @@ public class Enemy_Ctrl : MonoBehaviour
     private IEnumerator EnemyDeath()
     {
         yield return new WaitForSeconds(EnemyAni.GetCurrentAnimatorStateInfo(0).length); 
+
+        MoneySetting moneyManager = FindObjectOfType<MoneySetting>();
+        if(moneyManager != null)
+        {
+            int money = Random.Range(minMoney, maxMoney);
+            moneyManager.AddMoney(money);
+        }
         EnemySpawner.onEnemyDestroy.Invoke();
         Destroy(gameObject);
     }

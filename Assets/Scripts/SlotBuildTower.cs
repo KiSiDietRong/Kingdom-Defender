@@ -7,6 +7,7 @@ public class SlotBuildTower : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
+    [SerializeField] private int towerCost = 70;
 
     private GameObject tower;
     private Color startColor;
@@ -29,9 +30,21 @@ public class SlotBuildTower : MonoBehaviour
     private void OnMouseDown()
     {
         if (tower != null) return;
-        GameObject towerToBuild = BuildManager.Main.GetSelectedTower();
-        tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
 
+        if (BuildManager.Main.TrySpendMoney(towerCost))
+        {
+            GameObject towerToBuild = BuildManager.Main.GetSelectedTower();
+            tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            StartCoroutine(FlashInsufficientFunds());
+        }
     }
-
+    private IEnumerator FlashInsufficientFunds()
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        sr.color = startColor;
+    }
 }
