@@ -123,67 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &4961921
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.958931
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.673386
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406459821890570876, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2853233193491295322, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952961952523068279, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
-      propertyPath: m_Name
-      value: S_Walk_0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9f64ae01253166342b7652fa3f203e4e, type: 3}
 --- !u!1 &7574394
 GameObject:
   m_ObjectHideFlags: 0
@@ -46830,19 +46769,19 @@ MonoBehaviour:
   waveCounterText: {fileID: 208339037}
   enemyPerSec: 0.5
   waves:
-  - enemyCounts: 05000000
-    timeUntilNextWave: 40
-  - enemyCounts: 06000000
-    timeUntilNextWave: 45
-  - enemyCounts: 07000000
-    timeUntilNextWave: 46
   - enemyCounts: 08000000
+    timeUntilNextWave: 40
+  - enemyCounts: 0c000000
+    timeUntilNextWave: 45
+  - enemyCounts: 10000000
+    timeUntilNextWave: 46
+  - enemyCounts: 12000000
     timeUntilNextWave: 48
-  - enemyCounts: 09000000
+  - enemyCounts: 16000000
     timeUntilNextWave: 50
-  - enemyCounts: 0a000000
+  - enemyCounts: 14000000
     timeUntilNextWave: 52
-  - enemyCounts: 0b000000
+  - enemyCounts: 19000000
     timeUntilNextWave: 60
   totalWaves: 7
   baseHealth: {fileID: 1567910759}
@@ -54988,4 +54927,3 @@ SceneRoots:
   - {fileID: 2478353416682553635}
   - {fileID: 1785993173}
   - {fileID: 714932031}
-  - {fileID: 4961921}
