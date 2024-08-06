@@ -10,7 +10,7 @@ public class SlotBuildTower : MonoBehaviour
 
     private GameObject tower;
     private Color startColor;
-
+    public GameObject Shop;
     private void Start()
     {
         startColor = sr.color;
@@ -26,12 +26,37 @@ public class SlotBuildTower : MonoBehaviour
         sr.color = startColor;
     }
 
+    /*private void OnMouseDown()
+    {
+        if (Shop == true)
+        {
+            Shop.SetActive(false);
+        }
+        
+            Shop.SetActive(true);
+        
+        // towerToBuild = BuildManager.Main.GetSelectedTower();
+        //tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
+
+    }*/
+
     private void OnMouseDown()
     {
-        if (tower != null) return;
-        GameObject towerToBuild = BuildManager.Main.GetSelectedTower();
-        tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
+        // Toggle the active state of the Shop
+        if (Shop.activeSelf)
+        {
+            Shop.SetActive(false); // Turn off the shop if it is on
+        }
+        else
+        {
+            Shop.SetActive(true); // Turn on the shop if it is off
+        }
 
+        // Optionally, you can turn off the SpriteRenderer (circle) if needed
+        // sr.enabled = false;
+
+        // towerToBuild = BuildManager.Main.GetSelectedTower();
+        // tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
     }
 
 }
