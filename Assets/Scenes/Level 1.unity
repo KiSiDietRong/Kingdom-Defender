@@ -54525,8 +54525,8 @@ MonoBehaviour:
   moveSpeed: 1000
   PlayerAnim: {fileID: 1018923639466909834}
   attackRange: 3
-  minDMG: 10
-  maxDMG: 20
+  minDMG: 5
+  maxDMG: 10
   sprite: {fileID: 2277022469999419361}
   enemies:
     serializedVersion: 2
