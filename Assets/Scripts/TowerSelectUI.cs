@@ -12,10 +12,13 @@ public class TowerSelectionUI : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < towerButtons.Length; i++)
+        foreach (Button button in towerButtons)
         {
-            int index = i; 
-            towerButtons[i].onClick.AddListener(() => SelectTower(index));
+            button.onClick.AddListener(() =>
+            {
+                int towerIndex = button.transform.GetSiblingIndex();
+                SelectTower(towerIndex);
+            });
         }
     }
 

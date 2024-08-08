@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,12 @@ public class BuildManager : MonoBehaviour
     {
         Main = this;
     }
-    public GameObject GetSelectedTower()
+    public GameObject GetSelectedTower(int index)
     {
-        return towerPrefabs[selectedTower];
+        if (index >= 0 && index < towerPrefabs.Length)
+            return towerPrefabs[index];
+        else
+            return null;
     }
     public bool TrySpendMoney(int amount)
     {

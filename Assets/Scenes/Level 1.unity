@@ -1182,7 +1182,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.05}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 335, y: -195}
+  m_AnchoredPosition: {x: 65, y: -455}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &140110853
@@ -2241,7 +2241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.05}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 335, y: -65}
+  m_AnchoredPosition: {x: 65, y: -195}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &341327986
@@ -35558,7 +35558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.05}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 65, y: -195}
+  m_AnchoredPosition: {x: 65, y: -325}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &534992819
@@ -35700,6 +35700,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: moneySetting
+      value: 
+      objectReference: {fileID: 647612303}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: towerSelectionUI
+      value: 
+      objectReference: {fileID: 1557649018}
     - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
       propertyPath: towerSelectionPanel
       value: 
@@ -35905,6 +35913,7 @@ MonoBehaviour:
   moneyText: {fileID: 1191238215}
   insufficientFundsColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.5
+  towerCost: 460000004600000078000000b4000000
 --- !u!4 &647612304
 Transform:
   m_ObjectHideFlags: 0
@@ -36235,6 +36244,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: moneySetting
+      value: 
+      objectReference: {fileID: 647612303}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: towerSelectionUI
+      value: 
+      objectReference: {fileID: 1557649018}
     - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
       propertyPath: towerSelectionPanel
       value: 
@@ -49193,7 +49210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f451ec7beeb1e98419c79a4bfc4dfa90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerSelectionPanel: {fileID: 1910972751}
+  towerSelectionPanel: {fileID: 1557649017}
   towerButtons:
   - {fileID: 1994274976}
   - {fileID: 341327988}
@@ -49704,6 +49721,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: moneySetting
+      value: 
+      objectReference: {fileID: 647612303}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: towerSelectionUI
+      value: 
+      objectReference: {fileID: 1557649018}
     - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
       propertyPath: towerSelectionPanel
       value: 
@@ -50579,8 +50604,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40.414562, y: -30.3791}
-  m_SizeDelta: {x: 427.2384, y: 287.1274}
+  m_AnchoredPosition: {x: -864.04895, y: -75.7785}
+  m_SizeDelta: {x: 155.4904, y: 556.3358}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910972753
 MonoBehaviour:
@@ -50672,6 +50697,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: moneySetting
+      value: 
+      objectReference: {fileID: 647612303}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: towerSelectionUI
+      value: 
+      objectReference: {fileID: 1557649018}
     - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
       propertyPath: towerSelectionPanel
       value: 
@@ -50881,8 +50914,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -153, y: 79}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 8.8896, y: -19.0491}
+  m_SizeDelta: {x: 137.7121, y: 518.2346}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1958526648
 MonoBehaviour:
@@ -50907,7 +50940,7 @@ MonoBehaviour:
   m_CellSize: {x: 130, y: 130}
   m_Spacing: {x: 140, y: 0}
   m_Constraint: 1
-  m_ConstraintCount: 2
+  m_ConstraintCount: 1
 --- !u!1 &1977865042
 GameObject:
   m_ObjectHideFlags: 0
@@ -55371,6 +55404,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: moneySetting
+      value: 
+      objectReference: {fileID: 647612303}
+    - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
+      propertyPath: towerSelectionUI
+      value: 
+      objectReference: {fileID: 1557649018}
     - target: {fileID: 8195638871846213382, guid: 92f51f203184a7841a934a9db6d98a43, type: 3}
       propertyPath: towerSelectionPanel
       value: 

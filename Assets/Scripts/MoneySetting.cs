@@ -15,7 +15,12 @@ public class MoneySetting : MonoBehaviour
     [SerializeField] float flashDuration = 0.5f;
 
     private Color originColors;
+    [SerializeField] private int[] towerCost;
 
+    private void Awake()
+    {
+        originColors = moneyText.color;
+    }
     private void Start()
     {
         currentMoney = startingMoney;
@@ -41,6 +46,13 @@ public class MoneySetting : MonoBehaviour
             return false;
         }
     }
+    public int GetTowerCost(int index)
+    {
+        if (index >= 0 && index < towerCost.Length)
+            return towerCost[index];
+        else
+            return 0;
+    }
     private void UpdateMoneyDisplay()
     {
         moneyText.text = "Coin: " + currentMoney.ToString();
@@ -53,6 +65,14 @@ public class MoneySetting : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
 
         moneyText.color = initialColor;
+    }
+    public void ResetMoneyTextColor()
+    {
+        moneyText.color = originColors;
+    }
+    public void SetMoneyTextColor(Color color)
+    {
+        moneyText.color = color;
     }
     public int GetCurrentMoney()
     {
