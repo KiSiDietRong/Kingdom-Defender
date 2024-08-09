@@ -47,6 +47,13 @@ public class arrow : MonoBehaviour
             enemy.TakeDamage(arrowdmg);
         }
         Destroy(gameObject);
+
+        Player_Ctrl player = collision.gameObject.GetComponent<Player_Ctrl>();
+        if(player != null)
+        {
+
+        }
+        Destroy(gameObject);
     }
 
 }
