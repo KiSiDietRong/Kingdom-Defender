@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6433217354799097616}
   - component: {fileID: 2189512026234039881}
   - component: {fileID: 4147185913892333211}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: arrow
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -12672133
-  m_SortingLayer: 10
+  m_SortingLayerID: -2030370535
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 1938143306, guid: c93b1b353215d7648b4e79a201796e5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2189512026234039881}
-  arrowspeed: 50
-  arrowdmg: 10
+  arrowspeed: 100
+  arrowdmg: 5
