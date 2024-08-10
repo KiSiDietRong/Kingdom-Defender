@@ -214,7 +214,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -12672133
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 833294992, guid: 8b14b03177b57a74da2eb8666b8f4961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -344,6 +344,11 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  soldierLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  minMoney: 10
+  maxMoney: 20
 --- !u!1 &3007866147507663811
 GameObject:
   m_ObjectHideFlags: 0
