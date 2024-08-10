@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Weapon
   - Enemies
+  - bl
+  - Soldier
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - UI
   - Enemies
   - arrow
-  - 
+  - Soldier
   - 
   - 
   - 
@@ -70,6 +73,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2264596761
+    locked: 0
+  - name: Soldier
+    uniqueID: 4095061605
     locked: 0
   - name: Enemies
     uniqueID: 4282295163
