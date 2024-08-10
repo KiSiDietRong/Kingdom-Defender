@@ -43143,25 +43143,7 @@ MonoBehaviour:
   waves:
   - enemyCounts: 08000000
     timeUntilNextWave: 40
-  - enemyCounts: 0c000000
-    timeUntilNextWave: 45
-  - enemyCounts: 10000000
-    timeUntilNextWave: 46
-  - enemyCounts: 12000000
-    timeUntilNextWave: 48
-  - enemyCounts: 16000000
-    timeUntilNextWave: 50
-  - enemyCounts: 14000000
-    timeUntilNextWave: 52
-  - enemyCounts: 19000000
-    timeUntilNextWave: 60
-  - enemyCounts: 14000000
-    timeUntilNextWave: 30
-  - enemyCounts: 18000000
-    timeUntilNextWave: 40
-  - enemyCounts: 1c000000
-    timeUntilNextWave: 50
-  totalWaves: 10
+  totalWaves: 1
   baseHealth: {fileID: 1231667978081208664}
   starImages:
   - {fileID: 7540674290102163206}
