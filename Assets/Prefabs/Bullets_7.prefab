@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 941101211
   m_SortingLayer: 6
-  m_SortingOrder: 4
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1200763198, guid: 49f898b46f4ff7f44a2d5dcfcfa93653, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -98,10 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5147338e193df3745afca160d11989e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  lifeTime: 5
-  speed: 7
-  speedUpOverTime: 1
+  lifeTime: 3
+  speed: 2
+  speedUpOverTime: 0.5
   hitDistance: 0.2
   ballisticOffset: 0.5
   freezeRotation: 1

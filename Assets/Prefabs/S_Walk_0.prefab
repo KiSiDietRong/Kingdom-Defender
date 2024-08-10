@@ -482,8 +482,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
-  minMoney: 10
-  maxMoney: 20
 --- !u!114 &2526564903707353275
 MonoBehaviour:
   m_ObjectHideFlags: 0

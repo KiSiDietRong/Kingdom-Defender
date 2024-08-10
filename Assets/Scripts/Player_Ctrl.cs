@@ -50,17 +50,6 @@ public class Player_Ctrl : MonoBehaviour
         respawn = transform.position;
         colliders = GetComponents<Collider2D>();
     }
-    //private void OnEnable()
-    //{
-    //    // Play battle theme music when entering the gameplay scene
-    //    AudioManage.Instance.PlayBattleMusic();
-    //}
-
-    //private void OnDisable()
-    //{
-    //    // Return to theme music when exiting the gameplay scene
-    //    AudioManage.Instance.PlayThemeMusic();
-    //}
     void Update()
     {
         if(!isAttack && !isDead)
