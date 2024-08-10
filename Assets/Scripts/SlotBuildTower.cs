@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlotBuildTower : MonoBehaviour
 {
-    [Header("References")]
+    /*[Header("References")]
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
 
@@ -26,7 +26,7 @@ public class SlotBuildTower : MonoBehaviour
         sr.color = startColor;
     }
 
-    /*private void OnMouseDown()
+    //private void OnMouseDown()
     {
         if (Shop == true)
         {
@@ -38,7 +38,7 @@ public class SlotBuildTower : MonoBehaviour
         // towerToBuild = BuildManager.Main.GetSelectedTower();
         //tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
 
-    }*/
+    }
 
     private void OnMouseDown()
     {
@@ -59,4 +59,18 @@ public class SlotBuildTower : MonoBehaviour
         // tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
     }
 
+}*/
+    public GameObject selectionCanvas;
+
+    void OnMouseDown()
+    {
+        selectionCanvas.SetActive(true);
+        turretSelection.instance.SetBuildSpot(this);
+    }
+
+    public void BuildTurret(GameObject turretPrefab)
+    {
+        Instantiate(turretPrefab, transform.position, Quaternion.identity);
+        selectionCanvas.SetActive(false);
+    }
 }
