@@ -23,12 +23,14 @@ public class Enemy_Ctrl : MonoBehaviour
     [SerializeField] private int minDamage = 7;
     [SerializeField] private int maxDamage = 12;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask soldierLayer;
 
     [Header("Money Setting")]
     [SerializeField] private int minMoney = 10;
     [SerializeField] private int maxMoney = 20;
     private Transform target;
     private Transform player;
+    private Transform soldier;
     private bool isAttacking = false;
     private bool isDead = false;
 
@@ -92,6 +94,22 @@ public class Enemy_Ctrl : MonoBehaviour
         {
             player = null;
         }
+
+        Collider2D[] hitSoldiers = Physics2D.OverlapCircleAll(transform.position, atkRange, soldierLayer);
+
+        if (hitSoldiers.Length > 0)
+        {
+            soldier = hitSoldiers[0].transform;
+            rb.velocity = Vector2.zero;
+            if (!isAttacking)
+            {
+                StartCoroutine(PlayAttackAnimation2());
+            }
+        }
+        else
+        {
+            soldier = null;
+        }
     }
 
     private IEnumerator PlayAttackAnimation()
@@ -108,6 +126,22 @@ public class Enemy_Ctrl : MonoBehaviour
         isAttacking = false;
         ChangeAnimation("walk");
     }
+
+    private IEnumerator PlayAttackAnimation2()
+    {
+        isAttacking = true;
+        ChangeAnimation("atk");
+        AudioManage.Instance.PlaySFX("EnemyAtk");
+        yield return new WaitForSeconds(atkSpeed);
+        if (soldier != null)
+        {
+            int damage = Random.Range(minDamage, maxDamage);
+            soldier.GetComponent<SoldierScript>().TakeDamage(damage);
+        }
+        isAttacking = false;
+        ChangeAnimation("walk");
+    }
+
     private void ChangeAnimation(string aniName)
     {
         if (currentAni != aniName)
