@@ -164,3 +164,4 @@ MonoBehaviour:
   rb: {fileID: 2189512026234039881}
   arrowspeed: 100
   arrowdmg: 5
+  lifeTime: 2

@@ -11,13 +11,15 @@ public class arrow : MonoBehaviour
     [SerializeField] private float arrowspeed = 5f;
     [SerializeField] private int arrowdmg = 10;
 
-
+    public float lifeTime;
     private Transform target;
 
     private void Start()
     {
         Collider2D collider = GetComponent<Collider2D>();
         collider.isTrigger = true;
+
+        Destroy(gameObject, lifeTime);
     }
     public void SetTarget(Transform _target)
     {

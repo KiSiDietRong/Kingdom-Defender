@@ -103,6 +103,7 @@ MonoBehaviour:
   rb: {fileID: 4328618748166205286}
   arrowspeed: 25
   arrowdmg: 15
+  lifeTime: 2
 --- !u!50 &4328618748166205286
 Rigidbody2D:
   serializedVersion: 4
