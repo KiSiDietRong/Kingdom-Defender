@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2042363185
-  m_SortingLayer: 8
+  m_SortingLayerID: -2083548945
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 2126751794, guid: 7e1a1281213c2eb4382b18655b69d388, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,5 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 2723519772734904127}
   hoverColor: {r: 0.6754716, g: 0.6754716, b: 0.6754716, a: 0.6745098}
-  towerCost: 70
-  towerSelectionPanel: {fileID: 0}
+  towerSelectionUI: {fileID: 0}
+  moneySetting: {fileID: 0}

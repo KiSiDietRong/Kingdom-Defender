@@ -7,8 +7,6 @@ public class arrow : MonoBehaviour
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
 
-
-
     [Header("Attributes")]
     [SerializeField] private float arrowspeed = 5f;
     [SerializeField] private int arrowdmg = 10;
@@ -16,6 +14,11 @@ public class arrow : MonoBehaviour
 
     private Transform target;
 
+    private void Start()
+    {
+        Collider2D collider = GetComponent<Collider2D>();
+        collider.isTrigger = true;
+    }
     public void SetTarget(Transform _target)
     {
         target = _target;
@@ -41,12 +44,19 @@ public class arrow : MonoBehaviour
     //}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy_Ctrl enemy = collision.gameObject.GetComponent<Enemy_Ctrl>();
-        if (enemy != null)
+        if (collision.CompareTag("Enemies"))
         {
-            enemy.TakeDamage(arrowdmg);
+            Enemy_Ctrl enemy = collision.gameObject.GetComponent<Enemy_Ctrl>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(arrowdmg);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else if (collision.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

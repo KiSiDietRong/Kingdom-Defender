@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ using UnityEngine;
 public class dan : MonoBehaviour
 {
    
-    [HideInInspector] int damage = 1;
+    [HideInInspector] public int damage = 20;
    
     public float lifeTime = 3f;
     // Starting speed
@@ -80,15 +80,31 @@ public class dan : MonoBehaviour
 
         if (distanceToAim.magnitude <= hitDistance)
         {
+            HitTarget();
             Destroy(gameObject);
         }
      }
 
-  
+    private void HitTarget()
+    {
+        // Kiểm tra va chạm và gây sát thương cho mục tiêu
+        Collider2D hitCollider = Physics2D.OverlapCircle(transform.position, hitDistance);
+        if (hitCollider != null)
+        {
+            // Chỉ xử lý sát thương cho các đối tượng có component Enemy_Ctrl
+            Enemy_Ctrl enemy = hitCollider.GetComponent<Enemy_Ctrl>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+        }
+    }
+
+
 
     private void LookAtDirection2D(Vector2 direction)
     {
-        if (freezeRotation == false)
+        if (!freezeRotation)//freezeRotation == false)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
