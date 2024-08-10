@@ -76,4 +76,13 @@ public class AudioManage : MonoBehaviour
     {
         sfxSource.volume = volumn;
     }
+    public void PlayBattleMusic()
+    {
+        PlayMusic("BattleTheme");
+    }
+
+    public void PlayThemeMusic()
+    {
+        PlayMusic("Theme");
+    }
 }
