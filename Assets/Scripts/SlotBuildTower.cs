@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlotBuildTower : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class SlotBuildTower : MonoBehaviour
     [SerializeField] private Color hoverColor;
     [SerializeField] private TowerSelectionUI towerSelectionUI;
     [SerializeField] private MoneySetting moneySetting;
+    [SerializeField] private GameObject upgradeSellPanel;
 
     private bool isOccupied = false;
     private GameObject tower;
@@ -17,6 +19,8 @@ public class SlotBuildTower : MonoBehaviour
     private void Start()
     {
         startColor = sr.color;
+        upgradeSellPanel.SetActive(false);
+        towerSelectionUI.OnTowerSelected -= BuildTower;
     }
 
     private void OnMouseEnter()
@@ -31,7 +35,11 @@ public class SlotBuildTower : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!isOccupied)
+        if (isOccupied)
+        {
+            ShowUpgradeSellPanel();
+        }
+        else
         {
             towerSelectionUI.ShowTowerSelection();
             towerSelectionUI.OnTowerSelected += BuildTower;
@@ -53,6 +61,46 @@ public class SlotBuildTower : MonoBehaviour
             {
                 StartCoroutine(FlashInsufficientFunds());
             }
+        }
+    }
+    private void ShowUpgradeSellPanel()
+    {
+        upgradeSellPanel.SetActive(true);
+
+        if (upgradeSellPanel != null)
+        {
+            Button sellButton = upgradeSellPanel.transform.Find("SellButton")?.GetComponent<Button>();
+
+            if (sellButton != null)
+            {
+                sellButton.onClick.RemoveAllListeners();
+                sellButton.onClick.AddListener(SellTower);
+            }
+            else
+            {
+                Debug.LogError("SellButton không được tìm thấy trong upgradeSellPanel.");
+            }
+        }
+        else
+        {
+            Debug.LogError("upgradeSellPanel không được gán hoặc không tồn tại.");
+        }
+    }
+
+    private void HideUpgradeSellPanel()
+    {
+        upgradeSellPanel.SetActive(false);
+    }
+    private void SellTower()
+    {
+        if(tower != null)
+        {
+            int sellAmount = Mathf.RoundToInt(moneySetting.GetTowerCost(0) * 0.25f);
+            moneySetting.AddMoney(sellAmount);
+            Destroy(tower);
+            isOccupied = false;
+            HideUpgradeSellPanel();
+            towerSelectionUI.OnTowerSelected -= BuildTower;
         }
     }
     private IEnumerator FlashInsufficientFunds()
