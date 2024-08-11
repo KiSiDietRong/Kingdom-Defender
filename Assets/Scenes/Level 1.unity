@@ -49905,6 +49905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefabs:
   - {fileID: 2955836013079145524, guid: d04e65e85582fdf40b2c9ff2adc6cf9e, type: 3}
+  - {fileID: 9177493704746883380, guid: b76c05d95feadf740a5edc3a3888c835, type: 3}
   - {fileID: 836311417345348359, guid: 8f5b3bdd74058ec4bb63f591988d50dc, type: 3}
   - {fileID: 7201158957366571341, guid: 7d32d28a6fc42a04388c5483d6feed77, type: 3}
   moneySetting: {fileID: 4138280580180785706}
