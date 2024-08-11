@@ -110,6 +110,7 @@ public class SoldierScript : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(attackCooldown);
+        animator.ResetTrigger("Attack");
         canAttack = true;
     }
 
