@@ -52159,7 +52159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00a1cae8be2f8d40b8c5a4ec352f65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 1000
+  startingMoney: 200
   moneyText: {fileID: 4048289499098169791}
   insufficientFundsColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.5
@@ -55019,7 +55019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &8420860121342983388
 GameObject:
   m_ObjectHideFlags: 0

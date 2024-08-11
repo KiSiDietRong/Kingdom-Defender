@@ -45,22 +45,22 @@ public class Player_Ctrl : MonoBehaviour
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
 
-        AudioManage.Instance.PlayMusic("BattleTheme");
+        //AudioManage.Instance.PlayMusic("BattleTheme");
 
         respawn = transform.position;
         colliders = GetComponents<Collider2D>();
     }
-    //private void OnEnable()
-    //{
-    //    // Play battle theme music when entering the gameplay scene
-    //    AudioManage.Instance.PlayBattleMusic();
-    //}
+    private void OnEnable()
+    {
+        // Play battle theme music when entering the gameplay scene
+        AudioManage.Instance.PlayBattleMusic();
+    }
 
-    //private void OnDisable()
-    //{
-    //    // Return to theme music when exiting the gameplay scene
-    //    AudioManage.Instance.PlayThemeMusic();
-    //}
+    private void OnDisable()
+    {
+        // Return to theme music when exiting the gameplay scene
+        AudioManage.Instance.PlayThemeMusic();
+    }
     void Update()
     {
         if(!isAttack && !isDead)
