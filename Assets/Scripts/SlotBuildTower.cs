@@ -63,6 +63,23 @@ public class SlotBuildTower : MonoBehaviour
             }
         }
     }
+    private void UpgradeTower(int upgradeIndex)
+    {
+        if (isOccupied && tower != null)
+        {
+            if (BuildManager.Main.TrySpendMoney(moneySetting.GetTowerCost(upgradeIndex)))
+            {
+                Destroy(tower);
+                GameObject upgradeTower = BuildManager.Main.GetUpgradeTower(upgradeIndex);
+                tower = Instantiate(upgradeTower, transform.position, Quaternion.identity);
+                moneySetting.ResetMoneyTextColor();
+            }
+            else
+            {
+                StartCoroutine(FlashInsufficientFunds());
+            }
+        }
+    }
     private void ShowUpgradeSellPanel()
     {
         upgradeSellPanel.SetActive(true);
@@ -70,6 +87,7 @@ public class SlotBuildTower : MonoBehaviour
         if (upgradeSellPanel != null)
         {
             Button sellButton = upgradeSellPanel.transform.Find("SellButton")?.GetComponent<Button>();
+            Button upgradeButton = upgradeSellPanel.transform.Find("UpgradeButton")?.GetComponent<Button>();
 
             if (sellButton != null)
             {
@@ -79,6 +97,11 @@ public class SlotBuildTower : MonoBehaviour
             else
             {
                 Debug.LogError("SellButton không được tìm thấy trong upgradeSellPanel.");
+            }
+            if(upgradeButton != null)
+            {
+                upgradeButton.onClick.RemoveAllListeners();
+                upgradeButton.onClick.AddListener(() => towerSelectionUI.ShowTowerSelection());
             }
         }
         else
