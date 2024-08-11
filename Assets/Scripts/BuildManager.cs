@@ -39,7 +39,7 @@ public class BuildManager : MonoBehaviour
     }
     public int GetUpgradeCost(int index)
     {
-        if (index > 0 && index < upgradeCost.Length)
+        if (index >= 0 && index < upgradeCost.Length)
             return upgradeCost[index];
         else
             return 0;

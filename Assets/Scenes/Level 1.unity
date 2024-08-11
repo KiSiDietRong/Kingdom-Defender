@@ -49948,12 +49948,12 @@ MonoBehaviour:
   - {fileID: 836311417345348359, guid: 8f5b3bdd74058ec4bb63f591988d50dc, type: 3}
   - {fileID: 7201158957366571341, guid: 7d32d28a6fc42a04388c5483d6feed77, type: 3}
   upgradeTowerPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2983750131233377401, guid: 094aaf49d7944944cae7fe9fc06062ff, type: 3}
+  - {fileID: 4413495696234504949, guid: 99b2be8e8a510314aae8f255eb9b8878, type: 3}
+  - {fileID: 6979317465551959043, guid: 86b8058ecf6d0824ea3c13f047525c95, type: 3}
+  - {fileID: 5535502071538728226, guid: 1f97cec2275ea5544a725fcd797fceb9, type: 3}
   moneySetting: {fileID: 4138280580180785706}
-  upgradeCost: 00000000000000000000000000000000
+  upgradeCost: 6e00000069000000960000007d000000
 --- !u!223 &992628147067383902
 Canvas:
   m_ObjectHideFlags: 0
@@ -51738,7 +51738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &3424065519992302085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52159,11 +52159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00a1cae8be2f8d40b8c5a4ec352f65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 200
+  startingMoney: 1000
   moneyText: {fileID: 4048289499098169791}
   insufficientFundsColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.5
-  towerCost: 460000004600000078000000b4000000
+  towerCost: 46000000460000005a0000007d000000
 --- !u!223 &4182450272748326943
 Canvas:
   m_ObjectHideFlags: 0
@@ -55160,7 +55160,7 @@ GameObject:
   - component: {fileID: 3721789829497161165}
   - component: {fileID: 7996827440803616024}
   m_Layer: 5
-  m_Name: Upgrade
+  m_Name: UpgradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

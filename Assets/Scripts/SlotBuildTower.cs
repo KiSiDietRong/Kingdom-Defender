@@ -15,6 +15,7 @@ public class SlotBuildTower : MonoBehaviour
     private bool isOccupied = false;
     private GameObject tower;
     private Color startColor;
+    private int currentIndexUpgrade = -1;
 
     private void Start()
     {
@@ -56,6 +57,7 @@ public class SlotBuildTower : MonoBehaviour
                 towerSelectionUI.HideTowerSelection();
                 isOccupied = true;
                 moneySetting.ResetMoneyTextColor();
+                currentIndexUpgrade = towerIndex;
             }
             else
             {
@@ -67,12 +69,16 @@ public class SlotBuildTower : MonoBehaviour
     {
         if (isOccupied && tower != null)
         {
-            if (BuildManager.Main.TrySpendMoney(moneySetting.GetTowerCost(upgradeIndex)))
+            int upgradeCost = BuildManager.Main.GetUpgradeCost(upgradeIndex);
+
+            if (BuildManager.Main.TrySpendMoney(upgradeCost))
             {
                 Destroy(tower);
                 GameObject upgradeTower = BuildManager.Main.GetUpgradeTower(upgradeIndex);
                 tower = Instantiate(upgradeTower, transform.position, Quaternion.identity);
                 moneySetting.ResetMoneyTextColor();
+
+                HideUpgradeSellPanel();
             }
             else
             {
@@ -82,6 +88,8 @@ public class SlotBuildTower : MonoBehaviour
     }
     private void ShowUpgradeSellPanel()
     {
+        Debug.Log("ShowUpgradeSellPanel called");
+
         upgradeSellPanel.SetActive(true);
 
         if (upgradeSellPanel != null)
@@ -101,7 +109,11 @@ public class SlotBuildTower : MonoBehaviour
             if(upgradeButton != null)
             {
                 upgradeButton.onClick.RemoveAllListeners();
-                upgradeButton.onClick.AddListener(() => towerSelectionUI.ShowTowerSelection());
+                upgradeButton.onClick.AddListener(() =>
+                {
+                    int upgradeIndex = currentIndexUpgrade;
+                    UpgradeTower(upgradeIndex);
+                });
             }
         }
         else
