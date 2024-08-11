@@ -55,7 +55,7 @@ MonoBehaviour:
   animator: {fileID: 4556122257977176609}
   TargetingRange: 10
   rotationspeed: 0
-  bps: 1.2
+  bps: 0.8
 --- !u!1 &5656734957344088306
 GameObject:
   m_ObjectHideFlags: 0
